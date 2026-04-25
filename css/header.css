@@ -1,0 +1,139 @@
+/* NAVEGADOR */
+nav {
+    width: 100%;
+    background: #002261;
+    top: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+main {
+    margin-top: 64px;
+}
+
+nav button {
+    width: 48px;
+    height: 54px;
+    background: none;
+    color: #ffffff;
+    font-size: 40px;
+    border: 0px solid white;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 0 5px;
+    float: left;
+}
+
+nav a img {
+    width: 50px;
+    height: 50px;
+    margin: 7px;
+    float: left;
+}
+
+nav ul {
+    margin: 20px;
+    float: left;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 24px;
+}
+
+nav ul li a:hover {
+    background: #0f52a1;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 24px;
+}
+
+nav ul li a.active {
+    background: #0f52a1;
+    color: #ffffff;
+    border-bottom: 2px solid skyblue;
+    text-decoration: none;
+    padding: 24px;
+}
+
+nav .opciones {
+    margin: 20px;
+    float: right;
+}
+
+nav .opciones a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 20px;
+}
+
+.nav-lateral {
+    width: 300px;
+    height: 100%;
+    background: white;
+    margin-left: -300px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+}
+
+.nav-lateral button {
+    width: 48px;
+    height: 54px;
+    background: black;
+    color: #ffffff;
+    font-size: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 5px;
+    float: left;
+}
+
+.nav-lateral button span {
+    position: absolute;
+    margin-top: -26px;
+    margin-left: -10px;
+    float: left;
+}
+
+.nav-lateral a img {
+    width: 50px;
+    height: 50px;
+    margin-top: 7px;
+    padding: 0;
+}
+
+.nav-lateral ul {
+    margin: 5px;
+    padding: 10px;
+}
+
+.nav-lateral ul li {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.nav-lateral ul li a {
+    width: 250px;
+    display: block;
+    background: #eeeeee;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+.nav-lateral ul li a.active {
+    background: #0f52a1;
+    color: #ffffff;
+    width: 250px;
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
