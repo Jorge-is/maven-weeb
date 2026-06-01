@@ -1,34 +1,32 @@
 <?php
 session_start();
 
-define("AES_KEY", "clave_secreta_para_aes"); // Define tu clave de cifrado
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     function limpiar_espacios($cadena) {
         return trim(preg_replace('/\s+/', ' ', $cadena));
     }
-    
+
     function formato_capital($cadena) {
         return ucwords(strtolower($cadena));
     }
 
     $usuario = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
-    $clave = formato_capital(limpiar_espacios(strip_tags($_POST['clave']))); // Tomar la clave sin hashear
+    $clave   = formato_capital(limpiar_espacios(strip_tags($_POST['clave'])));
 
     try {
         conectar();
-        $sql = "SELECT id_administrador, nombre, usuario, AES_DECRYPT(clave, '" . AES_KEY . "') AS clave FROM administradores WHERE usuario = '$usuario'";
-        $usuarios = consultar($sql);
+        $sql      = "SELECT id_administrador, nombre, usuario, AES_DECRYPT(clave, ?) AS clave FROM administradores WHERE usuario = ?";
+        $usuarios = consultar_prep($sql, "ss", AES_KEY, $usuario);
         desconectar();
 
         $usuarioValido = false;
 
         foreach ($usuarios as $usuarioDb) {
             if ($usuarioDb['usuario'] === $usuario && $usuarioDb['clave'] === $clave) {
-                $_SESSION["id_administrador"]=$usuarioDb['id_cadministrador'] ;
-                $_SESSION["nombre_administrador"]=$usuarioDb['nombre'] ;
-                $_SESSION["rol_administrador"]="administradores";
+                $_SESSION["id_administrador"]    = $usuarioDb['id_administrador'];
+                $_SESSION["nombre_administrador"] = $usuarioDb['nombre'];
+                $_SESSION["rol_administrador"]   = "administradores";
                 $usuarioValido = true;
                 break;
             }
@@ -44,17 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (Exception $ex) {
         die($ex->getMessage());
     }
-} else{
+} else {
     try {
         conectar();
-        $sql = "SELECT * FROM administradores ";
-        $administradores = consultar($sql);
+        $administradores = consultar("SELECT * FROM administradores");
         desconectar();
 
         if (count($administradores) > 0) {
             $administrador = $administradores[0];
         } else {
-            echo "No hay administradores" ;
+            echo "No hay administradores";
         }
     } catch (Exception $ex) {
         die($ex->getMessage());

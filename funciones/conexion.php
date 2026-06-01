@@ -1,56 +1,88 @@
 <?php
-# Definir zona horaria
 date_default_timezone_set("America/Lima");
 
-# Propiedades de la base de datos
-const HOST = "localhost";
-const USER = "root";
-const PASS = "";
+const HOST     = "localhost";
+const USER     = "root";
+const PASS     = "";
 const DATABASE = "maven_web";
-const PORT = "3306";
+const PORT     = "3306";
+const AES_KEY  = "clave_secreta_para_aes";
 
-$cnx = ''; # Variable para la conexión
+$cnx = null;
 
-# Conexión a la base de datos
 function conectar() {
     global $cnx;
-    $cnx = mysqli_connect(HOST, USER, PASS, DATABASE, PORT);
-    if (!$cnx) {
-        die("Conexión fallida: " . mysqli_connect_error());
+    $cnx = new mysqli(HOST, USER, PASS, DATABASE, PORT);
+    if ($cnx->connect_error) {
+        die("Conexión fallida: " . $cnx->connect_error);
     }
-    mysqli_query($cnx, "SET NAMES 'utf8'");
+    $cnx->set_charset("utf8");
 }
 
-# Desconexión de la base de datos
-function desconectar(){
+function desconectar() {
     global $cnx;
     if ($cnx) {
-        mysqli_close($cnx);
+        $cnx->close();
+        $cnx = null;
     }
 }
 
-# Consultas a la Base de datos
-function consultar($query) {
+function consultar($sql) {
     global $cnx;
-    $result = mysqli_query($cnx, $query);
+    $result = $cnx->query($sql);
     if (!$result) {
-        throw new Exception(mysqli_error($cnx));
+        throw new Exception($cnx->error);
     }
-    $lista = array();
-    while ($registro = mysqli_fetch_assoc($result)) {
-        $lista[] = $registro;
+    $lista = [];
+    while ($row = $result->fetch_assoc()) {
+        $lista[] = $row;
     }
-    mysqli_free_result($result);
+    $result->free();
     return $lista;
 }
 
-# Ejecutar una consulta de modificación (INSERT, UPDATE, DELETE)
-function ejecutar($query) {
+function ejecutar($sql) {
     global $cnx;
-    if (mysqli_query($cnx, $query)) {
-        return true;
-    } else {
-        throw new Exception(mysqli_error($cnx));
+    if (!$cnx->query($sql)) {
+        throw new Exception($cnx->error);
     }
+    return true;
+}
+
+function consultar_prep($sql, $types = '', ...$params) {
+    global $cnx;
+    $stmt = $cnx->prepare($sql);
+    if (!$stmt) {
+        throw new Exception($cnx->error);
+    }
+    if ($types !== '') {
+        $stmt->bind_param($types, ...$params);
+    }
+    if (!$stmt->execute()) {
+        throw new Exception($stmt->error);
+    }
+    $result = $stmt->get_result();
+    $lista  = [];
+    while ($row = $result->fetch_assoc()) {
+        $lista[] = $row;
+    }
+    $stmt->close();
+    return $lista;
+}
+
+function ejecutar_prep($sql, $types = '', ...$params) {
+    global $cnx;
+    $stmt = $cnx->prepare($sql);
+    if (!$stmt) {
+        throw new Exception($cnx->error);
+    }
+    if ($types !== '') {
+        $stmt->bind_param($types, ...$params);
+    }
+    if (!$stmt->execute()) {
+        throw new Exception($stmt->error);
+    }
+    $stmt->close();
+    return true;
 }
 ?>

@@ -1,13 +1,12 @@
 <?php
+
 if (isset($_POST['id_proyecto']) && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
     $id_proyecto = intval($_POST['id_proyecto']);
+
     try {
         conectar();
-        $sql = "DELETE FROM proyectos WHERE id_proyecto = $id_proyecto";
-        if (ejecutar($sql)) {
-            echo "proyecto eliminado exitosamente.";
-        } else {
-            echo "Error al eliminar el proyecto: " . mysqli_error($cnx);
+        if (ejecutar_prep("DELETE FROM proyectos WHERE id_proyecto = ?", "i", $id_proyecto)) {
+            echo "Proyecto eliminado exitosamente.";
         }
         desconectar();
     } catch (Exception $ex) {

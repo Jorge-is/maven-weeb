@@ -5,11 +5,9 @@ if (isset($_POST['id_cotizacion']) && isset($_POST['funcion']) && $_POST['funcio
 
     try {
         conectar();
-        $sql = "DELETE FROM cotizaciones WHERE id_cotizacion = $id_cotizacion";
-        if (ejecutar($sql)) {
+        if (ejecutar_prep("DELETE FROM cotizaciones WHERE id_cotizacion = ?", "i", $id_cotizacion)) {
             header("Location: cotizacion.php?mensaje=eliminado");
-        } else {
-            echo "Error al eliminar la cotización: " . mysqli_error($cnx);
+            exit();
         }
         desconectar();
     } catch (Exception $ex) {

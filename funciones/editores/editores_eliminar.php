@@ -1,15 +1,12 @@
 <?php
 
-if (isset($_POST['id_editor'])  && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
+if (isset($_POST['id_editor']) && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
     $id_editor = intval($_POST['id_editor']);
 
     try {
         conectar();
-        $sql = "DELETE FROM editores WHERE id_editor = $id_editor";
-        if (ejecutar($sql)) {
+        if (ejecutar_prep("DELETE FROM editores WHERE id_editor = ?", "i", $id_editor)) {
             echo "Editor eliminado exitosamente.";
-        } else {
-            echo "Error al eliminar el editor: " . mysqli_error($cnx);
         }
         desconectar();
     } catch (Exception $ex) {
@@ -18,5 +15,4 @@ if (isset($_POST['id_editor'])  && isset($_POST['funcion']) && $_POST['funcion']
 } else {
     echo "ID no proporcionado.";
 }
-
 ?>

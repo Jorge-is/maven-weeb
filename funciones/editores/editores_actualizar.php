@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_POST['id_editor']) && isset($_GET['funcion']) &&  $_GET['funcion'] == 'actualizar') {
-    
+if (isset($_POST['id_editor']) && isset($_GET['funcion']) && $_GET['funcion'] == 'actualizar') {
+
     function limpiar_espacios($cadena) {
         return trim(preg_replace('/\s+/', ' ', $cadena));
     }
@@ -9,28 +9,21 @@ if (isset($_POST['id_editor']) && isset($_GET['funcion']) &&  $_GET['funcion'] =
     function formato_capital($cadena) {
         return ucwords(strtolower($cadena));
     }
-    
+
     $id_editor = intval($_POST['id_editor']);
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        define("AES_KEY", "clave_secreta_para_aes"); // Define tu clave de cifrado
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $apellido = formato_capital(limpiar_espacios(strip_tags($_POST['apellido'])));
-        $nombre = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
-        $correo = strtolower(limpiar_espacios($_POST['correo']));
-        $usuario = strtolower(limpiar_espacios($_POST['usuario']));
-        $clave = htmlentities(trim($_POST['clave']));
-        $id_administrador = htmlentities($_POST['id_administrador']);
+        $nombre   = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
+        $correo   = strtolower(limpiar_espacios($_POST['correo']));
+        $usuario  = strtolower(limpiar_espacios($_POST['usuario']));
+        $clave    = htmlentities(trim($_POST['clave']));
 
         try {
             conectar();
-            $clave_cifrada = "AES_ENCRYPT('$clave', '" . AES_KEY . "')";
-            $sql = "UPDATE editores 
-                    SET apellido = '$apellido', nombre = '$nombre', correo = '$correo', usuario = '$usuario', clave = $clave_cifrada 
-                    WHERE id_editor = $id_editor";
-            if (ejecutar($sql)) {
+            $sql = "UPDATE editores SET apellido = ?, nombre = ?, correo = ?, usuario = ?, clave = AES_ENCRYPT(?, ?) WHERE id_editor = ?";
+            if (ejecutar_prep($sql, "ssssssi", $apellido, $nombre, $correo, $usuario, $clave, AES_KEY, $id_editor)) {
                 echo "Editor actualizado exitosamente.";
-            } else {
-                echo "Error al actualizar el editor: " . mysqli_error($cnx);
             }
             desconectar();
         } catch (Exception $ex) {
@@ -38,5 +31,4 @@ if (isset($_POST['id_editor']) && isset($_GET['funcion']) &&  $_GET['funcion'] =
         }
     }
 }
-
 ?>

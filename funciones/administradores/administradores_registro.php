@@ -1,5 +1,4 @@
 <?php
-define("AES_KEY", "clave_secreta_para_aes"); // Define tu clave de cifrado
 
 function limpiar_espacios($cadena) {
     return trim(preg_replace('/\s+/', ' ', $cadena));
@@ -11,23 +10,16 @@ function formato_capital($cadena) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellido = formato_capital(limpiar_espacios(strip_tags($_POST['apellido'])));
-    $nombre = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
-    $correo = strtolower(limpiar_espacios(strip_tags($_POST['correo'])));
-    $usuario = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
-    $clave = formato_capital(limpiar_espacios(strip_tags($_POST['clave']))); // Tomar la clave sin hashear
+    $nombre   = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
+    $correo   = strtolower(limpiar_espacios(strip_tags($_POST['correo'])));
+    $usuario  = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
+    $clave    = formato_capital(limpiar_espacios(strip_tags($_POST['clave'])));
 
-    // Conectar a la base de datos y guardar los datos del cliente
     try {
         conectar();
-        $clave_cifrada = "AES_ENCRYPT('$clave', '" . AES_KEY . "')";
-        $sql = "INSERT INTO administradores (apellido, nombre, correo, usuario, clave) VALUES ('$apellido', '$nombre', '$correo', '$usuario', $clave_cifrada)";
-        if (ejecutar($sql)) {
-            echo "Administrador creado exitosamente.";
+        $sql = "INSERT INTO administradores (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, AES_ENCRYPT(?, ?))";
+        if (ejecutar_prep($sql, "ssssss", $apellido, $nombre, $correo, $usuario, $clave, AES_KEY)) {
             header("Location: index.php?mensaje=true");
-            exit();
-        } else {
-            echo "Error al crear al administrador.";
-            header("Location: administadores_registro.php?mensaje=false");
             exit();
         }
         desconectar();
@@ -35,5 +27,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die($ex->getMessage());
     }
 }
-
 ?>
