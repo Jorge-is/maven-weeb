@@ -3,3 +3,28 @@
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    # Previene clickjacking
+    Header always set X-Frame-Options "DENY"
+
+    # Previene MIME-type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Protección XSS en navegadores legacy
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # No filtrar el referrer en cross-origin (sin query string)
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Deshabilitar APIs no usadas
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+    # Content Security Policy
+    # script-src: sin 'unsafe-inline' — no hay scripts inline en el proyecto
+    # style-src: 'unsafe-inline' requerido — SweetAlert2 inyecta estilos via JS
+    # font-src: cdnjs para Font Awesome
+    # frame-ancestors 'none': complementa X-Frame-Options para navegadores modernos
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+</IfModule>
