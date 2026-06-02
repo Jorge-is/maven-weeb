@@ -1,7 +1,7 @@
 /* NAVEGADOR */
 nav {
     width: 100%;
-    background: #002261;
+    background: var(--color-nav);
     top: 0;
     position: fixed;
     z-index: 1;
@@ -15,10 +15,10 @@ nav button {
     width: 48px;
     height: 54px;
     background: none;
-    color: #ffffff;
+    color: var(--color-white);
     font-size: 40px;
-    border: 0px solid white;
-    border-radius: 5px;
+    border: none;
+    border-radius: var(--radius-sm);
     padding: 0 10px;
     margin: 0 5px;
     float: left;
@@ -41,21 +41,21 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #ffffff;
+    color: var(--color-white);
     text-decoration: none;
     padding: 24px;
 }
 
 nav ul li a:hover {
-    background: #0f52a1;
-    color: #ffffff;
+    background: var(--color-nav-hover);
+    color: var(--color-white);
     text-decoration: none;
     padding: 24px;
 }
 
 nav ul li a.active {
-    background: #0f52a1;
-    color: #ffffff;
+    background: var(--color-nav-hover);
+    color: var(--color-white);
     border-bottom: 2px solid skyblue;
     text-decoration: none;
     padding: 24px;
@@ -67,7 +67,7 @@ nav .opciones {
 }
 
 nav .opciones a {
-    color: #ffffff;
+    color: var(--color-white);
     text-decoration: none;
     padding: 20px;
 }
@@ -75,7 +75,7 @@ nav .opciones a {
 .nav-lateral {
     width: 300px;
     height: 100%;
-    background: white;
+    background: var(--color-white);
     margin-left: -300px;
     position: fixed;
     z-index: 2;
@@ -86,10 +86,10 @@ nav .opciones a {
     width: 48px;
     height: 54px;
     background: black;
-    color: #ffffff;
+    color: var(--color-white);
     font-size: 40px;
-    border: 1px solid white;
-    border-radius: 5px;
+    border: 1px solid var(--color-white);
+    border-radius: var(--radius-sm);
     padding: 0 10px;
     margin: 5px;
     float: left;
@@ -122,18 +122,17 @@ nav .opciones a {
 .nav-lateral ul li a {
     width: 250px;
     display: block;
-    background: #eeeeee;
-    color: rgb(0, 0, 0);
+    background: var(--color-hover);
+    color: var(--color-text);
     text-decoration: none;
     padding: 10px;
-    display: block;
 }
+
 .nav-lateral ul li a.active {
-    background: #0f52a1;
-    color: #ffffff;
+    background: var(--color-nav-hover);
+    color: var(--color-white);
     width: 250px;
     display: block;
     text-decoration: none;
     padding: 10px;
-    display: block;
 }

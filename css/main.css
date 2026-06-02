@@ -1,6 +1,73 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+    /* Brand */
+    --color-nav:          #002261;
+    --color-nav-hover:    #0f52a1;
+    --color-footer-start: #1e3d77;
+    --color-footer-end:   #0a0f18;
+    --color-table-header: #09509c;
+
+    /* Actions */
+    --color-primary:      #007bff;
+    --color-primary-dark: #0056b3;
+    --color-cta:          #3b87df;
+    --color-cta-hover:    #f86630;
+
+    /* Semantic */
+    --color-success:       rgb(78, 192, 106);
+    --color-warning:       rgb(255, 227, 128);
+    --color-danger:        #f44336;
+    --color-danger-light:  rgb(255, 134, 134);
+    --color-danger-dark:   #d32f2f;
+
+    /* Neutral */
+    --color-bg:            #f5f5f5;
+    --color-white:         #ffffff;
+    --color-surface:       #f8f9fa;
+    --color-text:          #343a40;
+    --color-text-muted:    #666666;
+    --color-border:        #dee2e6;
+    --color-border-light:  #c7c7c7;
+    --color-separator:     #aaaaaa;
+    --color-disabled:      #cccccc;
+    --color-neutral:       #908e8e;
+    --color-hover:         #e9ecef;
+    --color-stripe:        #f2f2f2;
+
+    /* Form */
+    --color-form-legend:  #151549;
+    --color-form-border:  rgb(6, 50, 146);
+    --color-form-link:    rgb(69, 78, 212);
+    --color-input-border: rgb(99, 99, 99);
+
+    /* Border radius */
+    --radius-sm:   5px;
+    --radius-md:   8px;
+    --radius-lg:   10px;
+    --radius-xl:   15px;
+    --radius-pill: 20px;
+
+    /* Typography */
+    --font-sans: Arial, sans-serif;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    /* Transitions */
+    --transition-bg:        background-color 0.3s ease;
+    --transition-transform: transform 0.2s ease;
+    --transition-img:       all 0.5s;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
     margin: 0;
     padding: 0;
 }
@@ -29,45 +96,40 @@ figure {
 
 figure img {
     object-fit: cover;
-    border-radius: 10px;
-    transition: all .5s;
+    border-radius: var(--radius-lg);
+    transition: var(--transition-img);
 }
 
 figure img:hover {
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: var(--radius-lg);
     transform: scale(1.2);
 }
 
 .precio {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #007bff;
+    color: var(--color-primary);
     margin-top: 0.5rem;
 }
 
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
 @media (min-width: 0px) and (max-width: 767px) {
-    .telefono-ocultar {
-        display: none;
-    }
+    .telefono-ocultar { display: none; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-    .tablet-ocultar {
-        display: none;
-    }
+    .tablet-ocultar { display: none; }
 }
 
 @media (min-width: 1024px) and (max-width: 1920px) {
-    .monitor-ocultar {
-        display: none;
-    }
+    .monitor-ocultar { display: none; }
 }
 
 @media (min-width: 1921px) {
-    .televisor-ocultar {
-        display: none;
-    }
+    .televisor-ocultar { display: none; }
 }
 
 .flex-center {
@@ -77,7 +139,9 @@ figure img:hover {
     flex-wrap: wrap;
 }
 
-/* BANNER  */
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 .banners img {
     width: 100%;
     height: auto;
@@ -139,6 +203,9 @@ figure img:hover {
     font-size: 20px;
 }
 
+/* ============================================================
+   JUMBO-2 SECTIONS
+   ============================================================ */
 .jumbo-2 article .lado-1 {
     background: linear-gradient(45deg, #ffcc00, #ff7e3d);
     width: 600px;
@@ -168,11 +235,10 @@ figure img:hover {
     width: 600px;
 }
 
-
 .lado-2 h2,
 .lado-2 h3 {
     width: 90%;
-    color: #ffffff;
+    color: var(--color-white);
     text-align: center;
 }
 
@@ -181,18 +247,21 @@ figure img:hover {
     font-weight: 800;
 }
 
+/* ============================================================
+   CARDS
+   ============================================================ */
 .tarjeta {
-    border-radius: 20px;
-    background-color: white;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-white);
     margin-right: 20px;
     margin-bottom: 20px;
-    border: 1px solid rgb(199, 199, 199);
+    border: 1px solid var(--color-border-light);
     text-align: center;
 }
 
 .tarjeta:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
-    background-color: white;
+    box-shadow: var(--shadow-md);
+    background-color: var(--color-white);
 }
 
 .tarjeta figure img {
@@ -229,25 +298,27 @@ figure img:hover {
 
 .tarjeta-texto {
     font-size: 1rem;
-    color: #666;
+    color: var(--color-text-muted);
     margin-bottom: 15px;
 }
 
-/* Botones estilos----Servicios*/
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: var(--transition-bg);
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--color-primary-dark);
 }
 
 .btn:focus {
@@ -255,48 +326,54 @@ figure img:hover {
 }
 
 .btn:disabled {
-    background-color: #ccc;
+    background-color: var(--color-disabled);
     cursor: not-allowed;
 }
 
-.boton{
-    border-radius: 20px;
+.boton {
+    border-radius: var(--radius-pill);
     padding: 5px 10px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: 0px solid none;
+    transition: var(--transition-bg);
+    border: none;
     margin-bottom: 5px;
 }
-.boton-mediano{
-    border-radius: 20px;
+
+.boton-mediano {
+    border-radius: var(--radius-pill);
     padding: 10px 20px;
     margin-bottom: 5px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: 0px solid none;
+    transition: var(--transition-bg);
+    border: none;
 }
-.boton-eliminar{
-    background: rgb(255, 134, 134);
-    border: 0px;
+
+.boton-eliminar {
+    background: var(--color-danger-light);
+    border: none;
 }
-.boton-insertar{
-    background: rgb(78, 192, 106);
-    border: 0px;
-    color: white;
+
+.boton-insertar {
+    background: var(--color-success);
+    border: none;
+    color: var(--color-white);
 }
-.boton-actualizar{
-    background: rgb(255, 227, 128);
-    border: 0px;
+
+.boton-actualizar {
+    background: var(--color-warning);
+    border: none;
 }
-.boton-primario{
-    background: rgb(38, 150, 215);
-    border: 0px;
-    color: white;
+
+.boton-primario {
+    background: var(--color-cta);
+    border: none;
+    color: var(--color-white);
 }
-.boton-secundario{
-    background: #908e8e;
-    border: 0px;
-    color: #f5f5f5;
+
+.boton-secundario {
+    background: var(--color-neutral);
+    border: none;
+    color: var(--color-bg);
 }
