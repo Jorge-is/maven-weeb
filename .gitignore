@@ -1,0 +1,6 @@
+# Credenciales — nunca commitear
+.env
+
+# XAMPP / PHP
+*.log
+/vendor/

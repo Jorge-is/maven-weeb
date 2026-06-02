@@ -1,17 +1,32 @@
 <?php
 date_default_timezone_set("America/Lima");
 
-const HOST     = "localhost";
-const USER     = "root";
-const PASS     = "";
-const DATABASE = "maven_web";
-const PORT     = "3306";
+(function () {
+    $env_path = __DIR__ . '/../.env';
+    if (!file_exists($env_path)) {
+        return;
+    }
+    foreach (file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#') || !str_contains($line, '=')) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        $_ENV[trim($key)] = trim($value);
+    }
+})();
+
+define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
+define('DB_USER', $_ENV['DB_USER'] ?? 'root');
+define('DB_PASS', $_ENV['DB_PASS'] ?? '');
+define('DB_NAME', $_ENV['DB_NAME'] ?? 'maven_web');
+define('DB_PORT', $_ENV['DB_PORT'] ?? '3306');
 
 $cnx = null;
 
 function conectar() {
     global $cnx;
-    $cnx = new mysqli(HOST, USER, PASS, DATABASE, PORT);
+    $cnx = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
     if ($cnx->connect_error) {
         die("Conexión fallida: " . $cnx->connect_error);
     }
