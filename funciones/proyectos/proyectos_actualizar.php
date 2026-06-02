@@ -21,6 +21,17 @@ if (isset($_POST['id_proyecto']) && isset($_GET['funcion']) && $_GET['funcion'] 
         $fecha     = strip_tags(trim($_POST['fecha']));
         $id_editor = (int)$_POST['id_editor'];
 
+        $errores = validar([
+            'nombre'  => ['valor' => $nombre,  'requerido' => true, 'min_len' => 2, 'max_len' => 100],
+            'detalle' => ['valor' => $detalle, 'requerido' => true, 'min_len' => 5, 'max_len' => 500],
+            'rubro'   => ['valor' => $rubro,   'requerido' => true, 'max_len' => 100],
+            'fecha'   => ['valor' => $fecha,   'requerido' => true],
+        ]);
+        if ($errores) {
+            echo implode(' ', $errores);
+            return;
+        }
+
         try {
             conectar();
             $sql = "UPDATE proyectos SET nombre = ?, detalle = ?, imagen = ?, rubro = ?, fecha = ?, id_editor = ? WHERE id_proyecto = ?";

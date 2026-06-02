@@ -20,6 +20,21 @@ if (isset($_POST['id_editor']) && isset($_GET['funcion']) && $_GET['funcion'] ==
         $usuario  = strtolower(limpiar_espacios($_POST['usuario']));
         $clave    = strip_tags(trim($_POST['clave']));
 
+        $reglas = [
+            'apellido' => ['valor' => $apellido, 'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+            'nombre'   => ['valor' => $nombre,   'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+            'correo'   => ['valor' => $correo,   'requerido' => true, 'email' => true, 'max_len' => 100],
+            'usuario'  => ['valor' => $usuario,  'requerido' => true, 'min_len' => 3, 'max_len' => 30],
+        ];
+        if (!empty($clave)) {
+            $reglas['clave'] = ['valor' => $clave, 'min_len' => 8];
+        }
+        $errores = validar($reglas);
+        if ($errores) {
+            echo implode(' ', $errores);
+            return;
+        }
+
         try {
             conectar();
 

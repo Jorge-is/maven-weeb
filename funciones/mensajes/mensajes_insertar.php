@@ -18,6 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo        = strtolower(limpiar_espacios(strip_tags($_POST['correo'])));
     $mensaje_texto = limpiar_espacios(strip_tags($_POST['mensaje_texto']));
 
+    $errores = validar([
+        'apellido'      => ['valor' => $apellido,      'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'nombre'        => ['valor' => $nombre,        'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'celular'       => ['valor' => $celular,       'requerido' => true, 'min_len' => 7, 'max_len' => 20],
+        'correo'        => ['valor' => $correo,        'requerido' => true, 'email' => true, 'max_len' => 100],
+        'mensaje_texto' => ['valor' => $mensaje_texto, 'requerido' => true, 'min_len' => 10, 'max_len' => 1000],
+    ]);
+    if ($errores) {
+        echo implode(' ', $errores);
+        return;
+    }
+
     try {
         conectar();
         $sql = "INSERT INTO mensajes (apellido, nombre, celular, correo, mensaje_texto) VALUES (?, ?, ?, ?, ?)";

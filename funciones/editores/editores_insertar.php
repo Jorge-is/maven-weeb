@@ -18,6 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['funcion'] == 'insertar') {
     $clave            = strip_tags(trim($_POST['clave']));
     $id_administrador = (int)$_POST['id_administrador'];
 
+    $errores = validar([
+        'apellido' => ['valor' => $apellido, 'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'nombre'   => ['valor' => $nombre,   'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'correo'   => ['valor' => $correo,   'requerido' => true, 'email' => true, 'max_len' => 100],
+        'usuario'  => ['valor' => $usuario,  'requerido' => true, 'min_len' => 3, 'max_len' => 30],
+        'clave'    => ['valor' => $clave,    'requerido' => true, 'min_len' => 8],
+    ]);
+    if ($errores) {
+        echo implode(' ', $errores);
+        return;
+    }
+
     $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
 
     try {

@@ -74,6 +74,33 @@ function e(mixed $str): string {
     return htmlspecialchars((string)$str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+function validar(array $reglas): array {
+    $errores = [];
+    foreach ($reglas as $campo => $r) {
+        $v = trim((string)($r['valor'] ?? ''));
+        if (!empty($r['requerido']) && $v === '') {
+            $errores[] = "El campo {$campo} es obligatorio.";
+            continue;
+        }
+        if ($v === '') {
+            continue;
+        }
+        if (!empty($r['email']) && !filter_var($v, FILTER_VALIDATE_EMAIL)) {
+            $errores[] = "El campo {$campo} debe ser un correo electrónico válido.";
+        }
+        if (isset($r['min_len']) && mb_strlen($v) < $r['min_len']) {
+            $errores[] = "El campo {$campo} debe tener al menos {$r['min_len']} caracteres.";
+        }
+        if (isset($r['max_len']) && mb_strlen($v) > $r['max_len']) {
+            $errores[] = "El campo {$campo} no puede superar {$r['max_len']} caracteres.";
+        }
+        if (!empty($r['positivo']) && (float)$v <= 0) {
+            $errores[] = "El campo {$campo} debe ser mayor a cero.";
+        }
+    }
+    return $errores;
+}
+
 function consultar($sql) {
     global $cnx;
     $result = $cnx->query($sql);

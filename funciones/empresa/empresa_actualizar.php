@@ -14,6 +14,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['
     $valores         = formato_capital(limpiar_espacios(strip_tags($_POST['valores'])));
     $id_administrador = intval($_POST['id_administrador']);
 
+    $errores = validar([
+        'nombre'        => ['valor' => $nombre,        'requerido' => true, 'min_len' => 2, 'max_len' => 100],
+        'descripcion'   => ['valor' => $descripcion,   'requerido' => true, 'max_len' => 500],
+        'celular'       => ['valor' => $celular,       'requerido' => true, 'min_len' => 7, 'max_len' => 20],
+        'correo'        => ['valor' => $correo,        'requerido' => true, 'email' => true, 'max_len' => 100],
+        'horario'       => ['valor' => $horario,       'requerido' => true, 'max_len' => 100],
+        'quienes_somos' => ['valor' => $quienes_somos, 'requerido' => true, 'max_len' => 2000],
+        'mision'        => ['valor' => $mision,        'requerido' => true, 'max_len' => 1000],
+        'vision'        => ['valor' => $vision,        'requerido' => true, 'max_len' => 1000],
+        'valores'       => ['valor' => $valores,       'requerido' => true, 'max_len' => 1000],
+    ]);
+    if ($errores) {
+        echo implode(' ', $errores);
+        return;
+    }
+
     try {
         conectar();
         $sql = "UPDATE empresa

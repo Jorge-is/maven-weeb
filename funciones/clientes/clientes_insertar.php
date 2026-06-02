@@ -20,21 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['
     $usuario  = isset($_POST['usuario'])  ? formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])))  : '';
     $clave    = isset($_POST['clave'])    ? strip_tags(trim($_POST['clave']))    : '';
 
-    if ($nombre && $correo && $usuario && $clave) {
-        $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
+    $errores = validar([
+        'apellido' => ['valor' => $apellido, 'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'nombre'   => ['valor' => $nombre,   'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'correo'   => ['valor' => $correo,   'requerido' => true, 'email' => true, 'max_len' => 100],
+        'usuario'  => ['valor' => $usuario,  'requerido' => true, 'min_len' => 3, 'max_len' => 30],
+        'clave'    => ['valor' => $clave,    'requerido' => true, 'min_len' => 8],
+    ]);
+    if ($errores) {
+        echo implode(' ', $errores);
+        return;
+    }
 
-        try {
-            conectar();
-            $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, ?)";
-            if (ejecutar_prep($sql, "sssss", $apellido, $nombre, $correo, $usuario, $hash)) {
-                echo "Cliente creado exitosamente.";
-            }
-            desconectar();
-        } catch (Exception $ex) {
-            die($ex->getMessage());
+    $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
+
+    try {
+        conectar();
+        $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, ?)";
+        if (ejecutar_prep($sql, "sssss", $apellido, $nombre, $correo, $usuario, $hash)) {
+            echo "Cliente creado exitosamente.";
         }
-    } else {
-        echo "Todos los campos son obligatorios.";
+        desconectar();
+    } catch (Exception $ex) {
+        die($ex->getMessage());
     }
 }
 ?>

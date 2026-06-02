@@ -17,6 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario  = strip_tags(trim($_POST['usuario']));
     $clave    = strip_tags(trim($_POST['clave']));
 
+    $errores = validar([
+        'apellido' => ['valor' => $apellido, 'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'nombre'   => ['valor' => $nombre,   'requerido' => true, 'min_len' => 2, 'max_len' => 50],
+        'correo'   => ['valor' => $correo,   'requerido' => true, 'email' => true, 'max_len' => 100],
+        'usuario'  => ['valor' => $usuario,  'requerido' => true, 'min_len' => 3, 'max_len' => 30],
+        'clave'    => ['valor' => $clave,    'requerido' => true, 'min_len' => 8],
+    ]);
+    if ($errores) {
+        header("Location: iniciar_sesion.php?mensaje=error");
+        exit();
+    }
+
     $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
 
     try {

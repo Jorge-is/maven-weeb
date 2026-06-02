@@ -18,6 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['funcion'] == 'insertar') {
     $hora      = strip_tags(trim($_POST['hora']));
     $id_editor = (int)$_POST['id_editor'];
 
+    $errores = validar([
+        'titulo'    => ['valor' => $titulo,    'requerido' => true, 'min_len' => 3, 'max_len' => 200],
+        'contenido' => ['valor' => $contenido, 'requerido' => true, 'min_len' => 10],
+        'fecha'     => ['valor' => $fecha,     'requerido' => true],
+        'hora'      => ['valor' => $hora,      'requerido' => true],
+    ]);
+    if ($errores) {
+        echo implode(' ', $errores);
+        return;
+    }
+
     try {
         conectar();
         $sql = "INSERT INTO blogs (titulo, imagen, contenido, fecha, hora, id_editor) VALUES (?, ?, ?, ?, ?, ?)";
