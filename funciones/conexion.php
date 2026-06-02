@@ -26,6 +26,35 @@ function desconectar() {
     }
 }
 
+function sesion_segura(): void {
+    if (session_status() !== PHP_SESSION_NONE) {
+        return;
+    }
+    session_set_cookie_params([
+        'lifetime' => 7200,
+        'path'     => '/',
+        'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
+        'httponly' => true,
+        'samesite' => 'Strict',
+    ]);
+    session_start();
+}
+
+function csrf_token(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function csrf_verificar(): void {
+    if (!isset($_POST['csrf_token'], $_SESSION['csrf_token'])
+        || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        http_response_code(403);
+        die('Token de seguridad inválido. Recargá la página e intentá nuevamente.');
+    }
+}
+
 function e(mixed $str): string {
     return htmlspecialchars((string)$str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }

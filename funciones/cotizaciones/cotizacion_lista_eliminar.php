@@ -24,7 +24,8 @@ function eliminarCotizacion($key) {
 
 // Verificar si el formulario fue enviado para eliminar una cotización
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
-    $key = $_POST['key'];
+    csrf_verificar();
+    $key = (int)$_POST['key'];
     eliminarCotizacion($key);
 }
 ?>

@@ -2,6 +2,8 @@
 include_once 'funciones/conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    sesion_segura();
+    csrf_verificar();
     function limpiar_espacios($cadena) {
         return trim(preg_replace('/\s+/', ' ', $cadena));
     }

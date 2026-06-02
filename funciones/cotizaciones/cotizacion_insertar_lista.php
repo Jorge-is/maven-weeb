@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['funcion']) && $_POST['funcion'] == 'insertar') {
+    csrf_verificar();
     if (isset($_SESSION['cotizaciones']) && !empty($_SESSION['cotizaciones'])) {
         $cotizaciones = $_SESSION['cotizaciones'];
 

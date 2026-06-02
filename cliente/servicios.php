@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_cliente"]) || $_SESSION["rol_cliente"] !== "clientes") {
     header("Location: ../iniciar_sesion.php");
     exit();
@@ -34,6 +34,7 @@ $hora       = date('H:i:s');
                         <p class="tarjeta-texto"><?php echo e($servicio['detalle']); ?></p>
                         <p class="precio">S/.<?php echo e($servicio['precio']); ?></p>
                         <form action="cotizacion.php" method="post">
+                            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                             <input type="hidden" name="id_cliente"       value="<?php echo $id_cliente; ?>">
                             <input type="hidden" name="id_servicio"      value="<?php echo (int)$servicio['id_servicio']; ?>">
                             <input type="hidden" name="nombre_servicio"  value="<?php echo e($servicio['nombre']); ?>">

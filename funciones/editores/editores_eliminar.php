@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['id_editor']) && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
+    csrf_verificar();
     $id_editor = intval($_POST['id_editor']);
 
     try {

@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['id_proyecto']) && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
+    csrf_verificar();
     $id_proyecto = intval($_POST['id_proyecto']);
 
     try {

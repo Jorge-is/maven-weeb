@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['funcion'] == 'actualizar') {
+    csrf_verificar();
     $id_empresa      = intval($_POST['id_empresa']);
     $nombre          = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
     $descripcion     = formato_capital(limpiar_espacios(strip_tags($_POST['descripcion'])));

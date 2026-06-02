@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
     exit();
@@ -28,6 +28,7 @@ $actualizando = isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Administrar Clientes</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <input type="hidden" name="id_cliente" value="<?php echo e($id_cliente); ?>">
                                 <label for="apellido">Apellidos</label>
                                 <input type="text" id="apellido" name="apellido" placeholder="Escriba sus apellidos" value="<?php echo e($apellido); ?>" maxlength="50" required>
@@ -77,6 +78,7 @@ $actualizando = isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar';
                                                     <button class="boton boton-actualizar">Actualizar</button>
                                                 </a>
                                                 <form method="POST" action="clientes_administrador.php" onsubmit="return confirm('¿Estás seguro de eliminar este cliente?');" style="display:inline;">
+                                                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                                     <input type="hidden" name="id_cliente" value="<?php echo (int)$cliente['id_cliente']; ?>">
                                                     <input type="hidden" name="funcion" value="eliminar">
                                                     <button class="boton boton-eliminar" type="submit">Eliminar</button>

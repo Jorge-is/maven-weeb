@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -10,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function formato_capital($cadena) {
         return ucwords(strtolower($cadena));
     }
+
+    sesion_segura();
+    csrf_verificar();
 
     $usuario = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
     $clave   = strip_tags(trim($_POST['clave']));
@@ -24,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         foreach ($usuarios as $usuarioDb) {
             if ($usuarioDb['usuario'] === $usuario && password_verify($clave, $usuarioDb['clave'])) {
+                session_regenerate_id(true);
                 $_SESSION["id_administrador"]     = $usuarioDb['id_administrador'];
                 $_SESSION["nombre_administrador"]  = $usuarioDb['nombre'];
                 $_SESSION["rol_administrador"]    = "administradores";
@@ -43,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die($ex->getMessage());
     }
 } else {
+    sesion_segura();
     try {
         conectar();
         $administradores = consultar("SELECT * FROM administradores");
@@ -51,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (count($administradores) > 0) {
             $administrador = $administradores[0];
         } else {
-            echo "No hay administradores";
+            $administrador = [];
         }
     } catch (Exception $ex) {
         die($ex->getMessage());

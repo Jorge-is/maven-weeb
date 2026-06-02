@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_editor"]) || $_SESSION["rol_editor"] !== "editores") {
     header("Location: index.php");
     exit();
@@ -24,6 +24,7 @@ include_once '../funciones/inicio/inicio_actualizar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Modificar inicio</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <input type="hidden" name="id_inicio" value="<?php echo (int)$inicio[0]['id_inicio']; ?>">
                                 <label for="banner">Banner:</label>
                                 <input type="text" name="banner" id="banner" value="<?php echo e($inicio[0]['banner']); ?>" required>

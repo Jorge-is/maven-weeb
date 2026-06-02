@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['id_editor']) && isset($_GET['funcion']) && $_GET['funcion'] == 'actualizar') {
+    csrf_verificar();
 
     function limpiar_espacios($cadena) {
         return trim(preg_replace('/\s+/', ' ', $cadena));

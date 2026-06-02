@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_cliente"]) || $_SESSION["rol_cliente"] !== "clientes") {
     header("Location: ../iniciar_sesion.php");
     exit();
@@ -48,6 +48,7 @@ include_once '../funciones/cotizaciones/cotizacion_lista_total.php';
                             <h2>S/.<?php echo number_format($total_precio, 2); ?></h2>
                             <?php if (isset($_SESSION['cotizaciones']) && !empty($_SESSION['cotizaciones'])): ?>
                                 <form method="POST" action="cotizacion.php" style="display:inline;">
+                                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                     <input type="hidden" name="funcion" value="insertar">
                                     <button class="boton-mediano boton-insertar" type="submit">Enviar cotización</button>
                                 </form>
@@ -81,6 +82,7 @@ include_once '../funciones/cotizaciones/cotizacion_lista_total.php';
                                                 <td>S/.<?php echo number_format((float)$cotizacion['precio'], 2); ?></td>
                                                 <td>
                                                     <form method="POST" action="cotizacion.php" onsubmit="return confirm('¿Estás seguro de eliminar esta cotización?');" style="display:inline;">
+                                                        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                                         <input type="hidden" name="key" value="<?php echo (int)$key; ?>">
                                                         <input type="hidden" name="funcion" value="eliminar">
                                                         <button class="boton boton-eliminar" type="submit">Eliminar</button>

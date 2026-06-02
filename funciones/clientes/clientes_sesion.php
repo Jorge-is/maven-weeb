@@ -1,7 +1,9 @@
 <?php
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    sesion_segura();
+    csrf_verificar();
+
     $usuario = strip_tags(trim($_POST['usuario']));
     $clave   = strip_tags(trim($_POST['clave']));
 
@@ -15,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         foreach ($usuarios as $usuarioDb) {
             if ($usuarioDb['usuario'] === $usuario && password_verify($clave, $usuarioDb['clave'])) {
+                session_regenerate_id(true);
                 $_SESSION["id_cliente"]     = $usuarioDb['id_cliente'];
                 $_SESSION["nombre_cliente"]  = $usuarioDb['nombre'];
                 $_SESSION["rol_cliente"]    = "clientes";
@@ -33,5 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (Exception $ex) {
         die($ex->getMessage());
     }
+} else {
+    sesion_segura();
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['funcion'] == 'eliminar') {
+    csrf_verificar();
     $id_mensaje = intval($_POST['id_mensaje']);
 
     try {

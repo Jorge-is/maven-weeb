@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
     exit();
@@ -27,6 +27,7 @@ include_once '../funciones/blogs/blogs_consultar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Registrar blog</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <input type="hidden" name="id_blog" value="<?php echo e($id_blog); ?>">
                                 <label for="titulo">Título:</label>
                                 <input type="text" id="titulo" name="titulo" placeholder="Escriba el título del blog" value="<?php echo e($titulo); ?>" required>
@@ -81,6 +82,7 @@ include_once '../funciones/blogs/blogs_consultar.php';
                                                     <button class="boton boton-actualizar">Actualizar</button>
                                                 </a>
                                                 <form method="POST" action="blogs_gestionar.php" onsubmit="return confirm('¿Estás seguro de eliminar este blog?');" style="display:inline;">
+                                                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                                     <input type="hidden" name="id_blog" value="<?php echo (int)$blog['id_blog']; ?>">
                                                     <input type="hidden" name="funcion" value="eliminar">
                                                     <button class="boton boton-eliminar" type="submit">Eliminar</button>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_editor"]) || $_SESSION["rol_editor"] !== "editores") {
     header("Location: ../index.php");
     exit();

@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
     exit();
@@ -27,6 +27,7 @@ include_once '../funciones/servicios/servicios_consultar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Registrar servicios</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <input type="hidden" name="id_servicio" value="<?php echo (int)($id_servicio ?? 0); ?>">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre" value="<?php echo e($nombre ?? ''); ?>" maxlength="50" required>
@@ -70,6 +71,7 @@ include_once '../funciones/servicios/servicios_consultar.php';
                                                     <button class="boton boton-actualizar">Actualizar</button>
                                                 </a>
                                                 <form method="POST" action="servicios_gestionar.php" onsubmit="return confirm('¿Estás seguro de eliminar este servicio?');" style="display:inline;">
+                                                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                                     <input type="hidden" name="id_servicio" value="<?php echo (int)$servicio['id_servicio']; ?>">
                                                     <input type="hidden" name="funcion" value="eliminar">
                                                     <button class="boton boton-eliminar" type="submit">Eliminar</button>

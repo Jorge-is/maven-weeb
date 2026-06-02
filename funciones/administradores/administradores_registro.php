@@ -9,6 +9,8 @@ function formato_capital($cadena) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    sesion_segura();
+    csrf_verificar();
     $apellido = formato_capital(limpiar_espacios(strip_tags($_POST['apellido'])));
     $nombre   = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
     $correo   = strtolower(limpiar_espacios(strip_tags($_POST['correo'])));

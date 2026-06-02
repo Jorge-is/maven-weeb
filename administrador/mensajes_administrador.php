@@ -1,5 +1,5 @@
 <?php
-session_start();
+sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
     exit();
@@ -44,6 +44,7 @@ include_once '../funciones/mensajes/mensajes_consultar.php';
                                             <td><?php echo e($mensaje['mensaje_texto']); ?></td>
                                             <td>
                                                 <form method="POST" action="mensajes_administrador.php" onsubmit="return confirm('¿Estás seguro de eliminar este mensaje?');" style="display:inline;">
+                                                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                                     <input type="hidden" name="id_mensaje" value="<?php echo (int)$mensaje['id_mensaje']; ?>">
                                                     <input type="hidden" name="funcion" value="eliminar">
                                                     <button class="boton boton-eliminar" type="submit">Eliminar</button>

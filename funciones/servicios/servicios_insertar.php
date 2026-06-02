@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['funcion'] == 'insertar') {
+    csrf_verificar();
 
     if (!function_exists('limpiar_espacios')) {
         function limpiar_espacios($cadena) {

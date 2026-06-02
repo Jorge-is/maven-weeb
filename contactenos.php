@@ -1,5 +1,6 @@
 <?php
 include_once 'funciones/conexion.php';
+sesion_segura();
 include_once 'funciones/empresa/empresa_consultar.php';
 // include_once 'funciones/mensaje/mensaje_consultar.php';
 include_once 'funciones/mensajes/mensajes_insertar.php';
@@ -24,6 +25,7 @@ include_once 'funciones/mensajes/mensajes_insertar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Contáctenos</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <label for="apellido">Apellidos</label>
                                 <input type="text" id="apellido" name="apellido" placeholder="Escriba sus apellidos" maxlength="50" required />
                                 

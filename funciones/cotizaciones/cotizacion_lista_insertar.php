@@ -11,6 +11,7 @@ function formato_capital($cadena) {
 
     // Inicializar arrays en la sesión si no están ya inicializados
     if (isset($_POST['funcion']) && $_POST['funcion'] == 'insertar_lista') {
+        csrf_verificar();
         if (!isset($_SESSION['cotizaciones'])) {
             $_SESSION['cotizaciones'] = array();
             $_SESSION['codigo_random'] = rand(10000,99999);

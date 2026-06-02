@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['id_cliente']) && isset($_POST['funcion']) && $_POST['funcion'] == 'actualizar') {
+    csrf_verificar();
 
     function limpiar_espacios($cadena) {
         return trim(preg_replace('/\s+/', ' ', $cadena));
