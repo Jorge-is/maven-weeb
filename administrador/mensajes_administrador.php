@@ -1,7 +1,8 @@
 <?php
-session_start(); 
-if ($_SESSION["rol_administrador"]!="administradores") {
+session_start();
+if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
+    exit();
 }
 include_once '../funciones/conexion.php';
 include_once '../funciones/mensajes/mensajes_eliminar.php';
@@ -9,12 +10,10 @@ include_once '../funciones/mensajes/mensajes_consultar.php';
 ?>
 <!DOCTYPE html>
 <html lang="ES">
-
 <head>
-    <title>Planes</title>
+    <title>Mensajes</title>
     <?php require_once './fragments/links.php'; ?>
 </head>
-
 <body>
     <?php require_once './fragments/header.php'; ?>
     <main>
@@ -36,25 +35,23 @@ include_once '../funciones/mensajes/mensajes_consultar.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                                foreach ($mensajes as $mensaje) {
-                                    echo "<tr>
-                                            <td>{$mensaje['apellido']}</td>
-                                            <td>{$mensaje['nombre']}</td>
-                                            <td>{$mensaje['celular']}</td>
-                                            <td>{$mensaje['correo']}</td>
-                                            <td>{$mensaje['mensaje_texto']}</td>
+                                    <?php foreach ($mensajes as $mensaje): ?>
+                                        <tr>
+                                            <td><?php echo e($mensaje['apellido']); ?></td>
+                                            <td><?php echo e($mensaje['nombre']); ?></td>
+                                            <td><?php echo e($mensaje['celular']); ?></td>
+                                            <td><?php echo e($mensaje['correo']); ?></td>
+                                            <td><?php echo e($mensaje['mensaje_texto']); ?></td>
                                             <td>
-                                                <form method='POST' action='mensajes_administrador.php' onsubmit='return confirm(\"¿Estás seguro de eliminar este mensaje?\");' style='display:inline;'>
-                                                    <input type='hidden' name='id_mensaje' value='{$mensaje['id_mensaje']}'>
-                                                    <input type='hidden' name='funcion' value='eliminar'>
-                                                    <button class='boton boton-eliminar' type='submit'>Eliminar</button>
+                                                <form method="POST" action="mensajes_administrador.php" onsubmit="return confirm('¿Estás seguro de eliminar este mensaje?');" style="display:inline;">
+                                                    <input type="hidden" name="id_mensaje" value="<?php echo (int)$mensaje['id_mensaje']; ?>">
+                                                    <input type="hidden" name="funcion" value="eliminar">
+                                                    <button class="boton boton-eliminar" type="submit">Eliminar</button>
                                                 </form>
                                             </td>
-                                        </tr>";
-                                }
-                                ?>
-                                </tbody>           
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -64,5 +61,4 @@ include_once '../funciones/mensajes/mensajes_consultar.php';
     </main>
     <?php require_once './fragments/footer.php'; ?>
 </body>
-
 </html>

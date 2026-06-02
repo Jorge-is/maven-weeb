@@ -1,7 +1,8 @@
 <?php
-session_start(); 
-if ($_SESSION["rol_administrador"]!="administradores") {
+session_start();
+if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
+    exit();
 }
 include_once '../funciones/conexion.php';
 include_once '../funciones/editores/editores_actualizar.php';
@@ -9,15 +10,14 @@ include_once '../funciones/editores/editores_eliminar.php';
 include_once '../funciones/editores/editores_insertar.php';
 include_once '../funciones/editores/editores_consultar_por_id.php';
 include_once '../funciones/editores/editores_consultar.php';
+$actualizando = isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar';
 ?>
 <!DOCTYPE html>
 <html lang="ES">
-
 <head>
-    <title>Cotizaciones</title>
+    <title>Gestionar Editores</title>
     <?php require_once './fragments/links.php'; ?>
 </head>
-
 <body>
     <?php require_once './fragments/header.php'; ?>
     <main>
@@ -28,39 +28,25 @@ include_once '../funciones/editores/editores_consultar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Registrar editores</legend>
-
-                                <input type="hidden" id="nombre" name="id_editor" value="<?php echo $id_editor;?>" maxlength="50" required/>
-
+                                <input type="hidden" name="id_editor" value="<?php echo e($id_editor); ?>">
                                 <label for="apellido">Apellidos</label>
-                                <input type="text" id="apellido" name="apellido" placeholder="Escriba sus apellidos" value="<?php echo $apellido; ?>" maxlength="50" required/>
-
+                                <input type="text" id="apellido" name="apellido" placeholder="Escriba sus apellidos" value="<?php echo e($apellido); ?>" maxlength="50" required>
                                 <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Escriba sus nombres" value="<?php echo $nombre; ?>" maxlength="50" required/>
-
+                                <input type="text" id="nombre" name="nombre" placeholder="Escriba sus nombres" value="<?php echo e($nombre); ?>" maxlength="50" required>
                                 <label for="correo">Correo electrónico</label>
-                                <input type="email" id="correo" name="correo" placeholder="ejemplo@gmail.com" value="<?php echo $correo;?>" maxlength="50" required/>
-
-                                <label for="nombre">Usuario</label>
-                                <input type="text" id="nombre" name="usuario" placeholder="Escriba sus nombres" value="<?php echo $usuario;?>" maxlength="50" required/>
-
-                                <label for="nombre">Clave</label>
-                                <input type="password" id="nombre" name="clave" placeholder="Escriba una clave" value="<?php echo $clave;?>" maxlength="50" required/>
-
-                                <input type="hidden" id="nombre" name="id_administrador" value="1" maxlength="50" required/>
-                                <?php
-                                if (isset($_GET['funcion']) && $_GET['funcion'] == 'actualizar') {
-                                ?>
-                                    <input type="hidden" id="funcion" name="funcion" value="actualizar" maxlength="50" required/>
+                                <input type="email" id="correo" name="correo" placeholder="ejemplo@gmail.com" value="<?php echo e($correo); ?>" maxlength="50" required>
+                                <label for="usuario">Usuario</label>
+                                <input type="text" id="usuario" name="usuario" placeholder="Escriba su usuario" value="<?php echo e($usuario); ?>" maxlength="50" required>
+                                <label for="clave">Clave</label>
+                                <input type="password" id="clave" name="clave" placeholder="<?php echo $actualizando ? 'Dejar en blanco para no cambiar' : 'Escriba una clave'; ?>" maxlength="50" <?php echo $actualizando ? '' : 'required'; ?>>
+                                <input type="hidden" name="id_administrador" value="<?php echo (int)$_SESSION['id_administrador']; ?>">
+                                <?php if ($actualizando): ?>
+                                    <input type="hidden" name="funcion" value="actualizar">
                                     <button class="boton-mediano boton-actualizar" type="submit">Actualizar</button>
-                                <?php
-                                } else {
-                                ?>
-                                    <input type="hidden" id="funcion" name="funcion" value="insertar" maxlength="50" required/>
+                                <?php else: ?>
+                                    <input type="hidden" name="funcion" value="insertar">
                                     <button class="boton-mediano boton-insertar" type="submit">Insertar</button>
-                                <?php
-                                }
-                                ?>                
-                                
+                                <?php endif; ?>
                             </fieldset>
                         </form>
                     </div>
@@ -82,28 +68,26 @@ include_once '../funciones/editores/editores_consultar.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    foreach ($editores as $editor) {
-                                        echo "<tr>
-                                                <td>{$editor['apellido']}</td>
-                                                <td>{$editor['nombre']}</td>
-                                                <td>{$editor['correo']}</td>
-                                                <td>{$editor['usuario']}</td>
-                                                <td>{$editor['id_administrador']}</td>
-                                                <td>
-                                                    <a href='editores_administrador.php?id_editor={$editor['id_editor']}&funcion=actualizar'>
-                                                        <button class='boton boton-actualizar'>Actualizar</button>
-                                                    </a>
-                                                    <form method='POST' action='editores_administrador.php' onsubmit='return confirm(\"¿Estás seguro de eliminar este editor?\");' style='display:inline;'>
-                                                        <input type='hidden' name='id_editor' value='{$editor['id_editor']}'>
-                                                        <input type='hidden' name='funcion' value='eliminar'>
-                                                        <button class='boton boton-eliminar' type='submit'>Eliminar</button>
-                                                    </form>
-                                                </td>
-                                              </tr>";
-                                    }
-                                    ?>
-                                </tbody>           
+                                    <?php foreach ($editores as $editor): ?>
+                                        <tr>
+                                            <td><?php echo e($editor['apellido']); ?></td>
+                                            <td><?php echo e($editor['nombre']); ?></td>
+                                            <td><?php echo e($editor['correo']); ?></td>
+                                            <td><?php echo e($editor['usuario']); ?></td>
+                                            <td><?php echo (int)$editor['id_administrador']; ?></td>
+                                            <td>
+                                                <a href="editores_administrador.php?id_editor=<?php echo (int)$editor['id_editor']; ?>&funcion=actualizar">
+                                                    <button class="boton boton-actualizar">Actualizar</button>
+                                                </a>
+                                                <form method="POST" action="editores_administrador.php" onsubmit="return confirm('¿Estás seguro de eliminar este editor?');" style="display:inline;">
+                                                    <input type="hidden" name="id_editor" value="<?php echo (int)$editor['id_editor']; ?>">
+                                                    <input type="hidden" name="funcion" value="eliminar">
+                                                    <button class="boton boton-eliminar" type="submit">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -113,5 +97,4 @@ include_once '../funciones/editores/editores_consultar.php';
     </main>
     <?php require_once './fragments/footer.php'; ?>
 </body>
-
 </html>

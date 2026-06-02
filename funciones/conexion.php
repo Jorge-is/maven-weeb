@@ -26,6 +26,10 @@ function desconectar() {
     }
 }
 
+function e(mixed $str): string {
+    return htmlspecialchars((string)$str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
 function consultar($sql) {
     global $cnx;
     $result = $cnx->query($sql);

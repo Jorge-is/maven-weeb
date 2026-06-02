@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
+    header("Location: index.php");
+    exit();
+}
 include_once '../funciones/conexion.php';
 include_once '../funciones/servicios/servicios_actualizar.php';
 include_once '../funciones/servicios/servicios_eliminar.php';
@@ -8,12 +13,10 @@ include_once '../funciones/servicios/servicios_consultar.php';
 ?>
 <!DOCTYPE html>
 <html lang="ES">
-
 <head>
     <title>Servicios</title>
     <?php require_once './fragments/links.php'; ?>
 </head>
-
 <body>
     <?php require_once './fragments/header.php'; ?>
     <main>
@@ -24,22 +27,20 @@ include_once '../funciones/servicios/servicios_consultar.php';
                         <form id="contactForm" method="POST" action="" class="formulario">
                             <fieldset>
                                 <legend>Registrar servicios</legend>
-                                <input type="hidden" id="id_servicio" name="id_servicio" value="<?php echo $id_servicio; ?>" required />
+                                <input type="hidden" name="id_servicio" value="<?php echo (int)($id_servicio ?? 0); ?>">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre" value="<?php echo $nombre; ?>" maxlength="50" required />
+                                <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre" value="<?php echo e($nombre ?? ''); ?>" maxlength="50" required>
                                 <label for="detalle">Detalle</label>
-                                <input type="text" id="detalle" name="detalle" placeholder="Escriba la descripcion" value="<?php echo $detalle; ?>" maxlength="50" required />
+                                <input type="text" id="detalle" name="detalle" placeholder="Escriba la descripcion" value="<?php echo e($detalle ?? ''); ?>" maxlength="50" required>
                                 <label for="precio">Precio</label>
-                                <input type="number" id="precio" name="precio" placeholder="Escriba el precio del servicio" value="<?php echo $precio; ?>" maxlength="50" required />
-                                <input type="hidden" name="id_editor" value="<?php echo $_SESSION['id_editor']; ?>" required />
-                                
-                                <?php if (isset($_GET['funcion']) && $_GET['funcion'] == 'actualizar') { ?>
-                                    <input type="hidden" id="funcion" name="funcion" value="actualizar" required />
+                                <input type="number" id="precio" name="precio" placeholder="Escriba el precio del servicio" value="<?php echo e($precio ?? ''); ?>" step="0.01" required>
+                                <?php if (isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar'): ?>
+                                    <input type="hidden" name="funcion" value="actualizar">
                                     <button class="boton-mediano boton-actualizar" type="submit">Actualizar</button>
-                                <?php } else { ?>
-                                    <input type="hidden" id="funcion" name="funcion" value="insertar" required />
+                                <?php else: ?>
+                                    <input type="hidden" name="funcion" value="insertar">
                                     <button class="boton-mediano boton-insertar" type="submit">Insertar</button>
-                                <?php } ?>
+                                <?php endif; ?>
                             </fieldset>
                         </form>
                     </div>
@@ -59,25 +60,23 @@ include_once '../funciones/servicios/servicios_consultar.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    foreach ($servicios as $servicio) {
-                                        echo "<tr>
-                                        <td>{$servicio['nombre']}</td>
-                                        <td>{$servicio['detalle']}</td>
-                                        <td>{$servicio['precio']}</td>
-                                        <td>
-                                           <a href='servicios_gestionar.php?id_servicio={$servicio['id_servicio']}&funcion=actualizar'>
-                                              <button class='boton boton-actualizar'>Actualizar</button>
-                                           </a>                                      
-                                            <form method='POST' action='servicios_gestionar.php' onsubmit='return confirm(\"¿Estás seguro de eliminar este servicio?\");' style='display:inline;'>
-                                            <input type='hidden' name='id_servicio' value='{$servicio['id_servicio']}'>
-                                            <input type='hidden' name='funcion' value='eliminar'>
-                                            <button class='boton boton-eliminar' type='submit'>Eliminar</button>
-                                            </form>
-                                        </td>
-                                        </tr>";
-                                    }
-                                    ?>
+                                    <?php foreach ($servicios as $servicio): ?>
+                                        <tr>
+                                            <td><?php echo e($servicio['nombre']); ?></td>
+                                            <td><?php echo e($servicio['detalle']); ?></td>
+                                            <td><?php echo e($servicio['precio']); ?></td>
+                                            <td>
+                                                <a href="servicios_gestionar.php?id_servicio=<?php echo (int)$servicio['id_servicio']; ?>&funcion=actualizar">
+                                                    <button class="boton boton-actualizar">Actualizar</button>
+                                                </a>
+                                                <form method="POST" action="servicios_gestionar.php" onsubmit="return confirm('¿Estás seguro de eliminar este servicio?');" style="display:inline;">
+                                                    <input type="hidden" name="id_servicio" value="<?php echo (int)$servicio['id_servicio']; ?>">
+                                                    <input type="hidden" name="funcion" value="eliminar">
+                                                    <button class="boton boton-eliminar" type="submit">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -88,5 +87,4 @@ include_once '../funciones/servicios/servicios_consultar.php';
     </main>
     <?php require_once './fragments/footer.php'; ?>
 </body>
-
 </html>

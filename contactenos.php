@@ -46,13 +46,13 @@ include_once 'funciones/mensajes/mensajes_insertar.php';
                     <div class="jumbo-info">
                         <div class="tarjeta">
                             <h4>Dirección de la Empresa</h4>
-                            <p><?php echo $empresa[0]['direccion']; ?></p>
+                            <p><?php echo e($empresa[0]['direccion']); ?></p>
                             <h4>Número</h4>
-                            <p><?php echo $empresa[0]['celular']; ?></p>
+                            <p><?php echo e($empresa[0]['celular']); ?></p>
                             <h4>Correo</h4>
-                            <p><?php echo $empresa[0]['correo']; ?></p>
+                            <p><?php echo e($empresa[0]['correo']); ?></p>
                             <h4>Horario</h4>
-                            <p><?php echo $empresa[0]['horario']; ?></p>
+                            <p><?php echo e($empresa[0]['horario']); ?></p>
                         </div>
                         <div class="mapa">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.455575699114!2d-76.96845654611778!3d-12.08093289407926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c6ff58810593%3A0xa16b0e3adb106914!2sOficina%201404%20Torre%20A%2C%20Av.%20Circunvalaci%C3%B3n%20del%20Golf%20los%20Incas%20208%2C%20Santiago%20de%20Surco%2015023!5e0!3m2!1ses-419!2spe!4v1717795896186!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

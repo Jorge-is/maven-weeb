@@ -4,12 +4,10 @@ include_once 'funciones/empresa/empresa_consultar.php';
 ?>
 <!DOCTYPE html>
 <html lang="ES">
-
 <head>
     <title>Nosotros</title>
     <?php require_once './fragments/links.php'; ?>
 </head>
-
 <body>
     <?php require_once './fragments/header.php'; ?>
     <main>
@@ -20,13 +18,13 @@ include_once 'funciones/empresa/empresa_consultar.php';
                     <img src="imagenes/conocenos/trabajo_en_equipo.jpg" alt="trabajo_en_equipo">
                 </div>
                 <div class="jumbo-info">
-                    <p><?php echo $empresa[0]['quienes_somos']; ?></p>
+                    <p><?php echo e($empresa[0]['quienes_somos']); ?></p>
                 </div>
             </article>
             <article class="flex-center">
                 <h3 class="titulo-1">MISIÓN</h3>
                 <div class="jumbo-info">
-                    <p><?php echo $empresa[0]['mision']; ?></p>
+                    <p><?php echo e($empresa[0]['mision']); ?></p>
                 </div>
                 <div class="jumbo-img">
                     <img src="imagenes/conocenos/disenos_a_la_medida.jpg" alt="diseño_a_medida1">
@@ -38,13 +36,13 @@ include_once 'funciones/empresa/empresa_consultar.php';
                     <img src="imagenes/conocenos/vision.jpg" alt="vision">
                 </div>
                 <div class="jumbo-info">
-                    <p><?php echo $empresa[0]['vision']; ?></p>
+                    <p><?php echo e($empresa[0]['vision']); ?></p>
                 </div>
             </article>
             <article class="flex-center">
                 <h3 class="titulo-1">VALORES</h3>
                 <div class="jumbo-info">
-                    <p><?php echo $empresa[0]['valores']; ?></p>
+                    <p><?php echo e($empresa[0]['valores']); ?></p>
                 </div>
                 <div class="jumbo-img">
                     <img src="imagenes/conocenos/valores.jpg" alt="valores">
@@ -54,5 +52,4 @@ include_once 'funciones/empresa/empresa_consultar.php';
     </main>
     <?php require_once './fragments/footer.php'; ?>
 </body>
-
 </html>
