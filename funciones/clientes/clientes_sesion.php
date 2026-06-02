@@ -7,17 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         conectar();
-        $sql      = "SELECT id_cliente, nombre, usuario, AES_DECRYPT(clave, ?) AS clave FROM clientes WHERE usuario = ?";
-        $usuarios = consultar_prep($sql, "ss", AES_KEY, $usuario);
+        $sql      = "SELECT id_cliente, nombre, usuario, clave FROM clientes WHERE usuario = ?";
+        $usuarios = consultar_prep($sql, "s", $usuario);
         desconectar();
 
         $usuarioValido = false;
 
         foreach ($usuarios as $usuarioDb) {
-            if ($usuarioDb['usuario'] === $usuario && $usuarioDb['clave'] === $clave) {
-                $_SESSION["id_cliente"]    = $usuarioDb['id_cliente'];
-                $_SESSION["nombre_cliente"] = $usuarioDb['nombre'];
-                $_SESSION["rol_cliente"]   = "clientes";
+            if ($usuarioDb['usuario'] === $usuario && password_verify($clave, $usuarioDb['clave'])) {
+                $_SESSION["id_cliente"]     = $usuarioDb['id_cliente'];
+                $_SESSION["nombre_cliente"]  = $usuarioDb['nombre'];
+                $_SESSION["rol_cliente"]    = "clientes";
                 $usuarioValido = true;
                 break;
             }

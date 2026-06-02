@@ -15,10 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario  = strip_tags(trim($_POST['usuario']));
     $clave    = strip_tags(trim($_POST['clave']));
 
+    $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
+
     try {
         conectar();
-        $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, AES_ENCRYPT(?, ?))";
-        if (ejecutar_prep($sql, "ssssss", $apellido, $nombre, $correo, $usuario, $clave, AES_KEY)) {
+        $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, ?)";
+        if (ejecutar_prep($sql, "sssss", $apellido, $nombre, $correo, $usuario, $hash)) {
             header("Location: iniciar_sesion.php?mensaje=true");
             exit();
         }

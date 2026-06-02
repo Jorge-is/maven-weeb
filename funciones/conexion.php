@@ -6,7 +6,6 @@ const USER     = "root";
 const PASS     = "";
 const DATABASE = "maven_web";
 const PORT     = "3306";
-const AES_KEY  = "clave_secreta_para_aes";
 
 $cnx = null;
 

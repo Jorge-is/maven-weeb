@@ -13,12 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre   = formato_capital(limpiar_espacios(strip_tags($_POST['nombre'])));
     $correo   = strtolower(limpiar_espacios(strip_tags($_POST['correo'])));
     $usuario  = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
-    $clave    = formato_capital(limpiar_espacios(strip_tags($_POST['clave'])));
+    $clave    = strip_tags(trim($_POST['clave']));
+
+    $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
 
     try {
         conectar();
-        $sql = "INSERT INTO administradores (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, AES_ENCRYPT(?, ?))";
-        if (ejecutar_prep($sql, "ssssss", $apellido, $nombre, $correo, $usuario, $clave, AES_KEY)) {
+        $sql = "INSERT INTO administradores (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, ?)";
+        if (ejecutar_prep($sql, "sssss", $apellido, $nombre, $correo, $usuario, $hash)) {
             header("Location: index.php?mensaje=true");
             exit();
         }

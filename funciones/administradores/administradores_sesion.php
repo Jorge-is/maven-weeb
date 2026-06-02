@@ -12,21 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $usuario = formato_capital(limpiar_espacios(strip_tags($_POST['usuario'])));
-    $clave   = formato_capital(limpiar_espacios(strip_tags($_POST['clave'])));
+    $clave   = strip_tags(trim($_POST['clave']));
 
     try {
         conectar();
-        $sql      = "SELECT id_administrador, nombre, usuario, AES_DECRYPT(clave, ?) AS clave FROM administradores WHERE usuario = ?";
-        $usuarios = consultar_prep($sql, "ss", AES_KEY, $usuario);
+        $sql      = "SELECT id_administrador, nombre, usuario, clave FROM administradores WHERE usuario = ?";
+        $usuarios = consultar_prep($sql, "s", $usuario);
         desconectar();
 
         $usuarioValido = false;
 
         foreach ($usuarios as $usuarioDb) {
-            if ($usuarioDb['usuario'] === $usuario && $usuarioDb['clave'] === $clave) {
-                $_SESSION["id_administrador"]    = $usuarioDb['id_administrador'];
-                $_SESSION["nombre_administrador"] = $usuarioDb['nombre'];
-                $_SESSION["rol_administrador"]   = "administradores";
+            if ($usuarioDb['usuario'] === $usuario && password_verify($clave, $usuarioDb['clave'])) {
+                $_SESSION["id_administrador"]     = $usuarioDb['id_administrador'];
+                $_SESSION["nombre_administrador"]  = $usuarioDb['nombre'];
+                $_SESSION["rol_administrador"]    = "administradores";
                 $usuarioValido = true;
                 break;
             }

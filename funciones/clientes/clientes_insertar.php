@@ -20,10 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['
     $clave    = isset($_POST['clave'])    ? strip_tags(trim($_POST['clave']))    : '';
 
     if ($nombre && $correo && $usuario && $clave) {
+        $hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
+
         try {
             conectar();
-            $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, AES_ENCRYPT(?, ?))";
-            if (ejecutar_prep($sql, "ssssss", $apellido, $nombre, $correo, $usuario, $clave, AES_KEY)) {
+            $sql = "INSERT INTO clientes (apellido, nombre, correo, usuario, clave) VALUES (?, ?, ?, ?, ?)";
+            if (ejecutar_prep($sql, "sssss", $apellido, $nombre, $correo, $usuario, $hash)) {
                 echo "Cliente creado exitosamente.";
             }
             desconectar();
