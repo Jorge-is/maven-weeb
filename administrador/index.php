@@ -20,9 +20,9 @@ include_once '../funciones/administradores/administradores_sesion.php';
                             <fieldset>
                                 <legend>Iniciar sesión</legend>
                                 <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                                <label>Usuario</label>
+                                <label for="usuario">Usuario</label>
                                 <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario">
-                                <label>Contraseña</label>
+                                <label for="clave">Contraseña</label>
                                 <input type="password" id="clave" name="clave" placeholder="Ingrese su clave">
                                 <button class="submit-button" type="submit">Iniciar</button>
                                 <?php if (empty($administrador)): ?>

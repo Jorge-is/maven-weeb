@@ -23,12 +23,18 @@ include_once '../funciones/administradores/administradores_registro.php';
                             <fieldset>
                                 <legend>Regístrate</legend>
                                 <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                                <input type="text"     name="apellido"        placeholder="Apellidos"             required>
-                                <input type="text"     name="nombre"          placeholder="Nombres"               required>
-                                <input type="email"    name="correo"          placeholder="Correo electronico"    required>
-                                <input type="text"     name="usuario"         placeholder="Nombre de usuario"     required>
-                                <input type="password" name="clave"           placeholder="Contraseña"            required>
-                                <input type="password" name="clave_confirmar" placeholder="Confirmar contraseña"  required>
+                                <label for="apellido">Apellidos</label>
+                                <input type="text"     id="apellido"        name="apellido"        placeholder="Apellidos"            required>
+                                <label for="nombre">Nombre</label>
+                                <input type="text"     id="nombre"          name="nombre"          placeholder="Nombres"              required>
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email"    id="correo"          name="correo"          placeholder="Correo electronico"   required>
+                                <label for="usuario">Nombre de usuario</label>
+                                <input type="text"     id="usuario"         name="usuario"         placeholder="Nombre de usuario"    required>
+                                <label for="clave">Contraseña</label>
+                                <input type="password" id="clave"           name="clave"           placeholder="Contraseña"           required>
+                                <label for="clave_confirmar">Confirmar contraseña</label>
+                                <input type="password" id="clave_confirmar" name="clave_confirmar" placeholder="Confirmar contraseña" required>
                                 <button class="submit-button" type="submit">Continuar</button>
                             </fieldset>
                         </form>

@@ -44,7 +44,7 @@ include_once 'funciones/inicio/inicio_consultar.php';
                     </div>
                     <div class="jumbo-img">
                         <figure>
-                            <img src="imagenes/inicio/elegirnos.jpg" alt="">
+                            <img src="imagenes/inicio/elegirnos.jpg" alt="Por qué elegirnos - equipo Maven Web">
                         </figure>
                     </div>
                 </article>

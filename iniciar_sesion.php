@@ -20,9 +20,9 @@ include_once 'funciones/clientes/clientes_sesion.php';
                             <fieldset>
                                 <legend>Iniciar sesión</legend>
                                 <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                                <label>Usuario</label>
+                                <label for="usuario">Usuario</label>
                                 <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" maxlength="50">
-                                <label>Contraseña</label>
+                                <label for="clave">Contraseña</label>
                                 <input type="password" id="clave" name="clave" placeholder="Ingrese su clave" maxlength="50">
                                 <button class="submit-button" type="submit">Iniciar</button>
                                 <button class="submit-button" type="button">

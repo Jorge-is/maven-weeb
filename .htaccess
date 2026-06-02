@@ -22,9 +22,10 @@
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 
     # Content Security Policy
-    # script-src: sin 'unsafe-inline' — no hay scripts inline en el proyecto
+    # script-src: 'unsafe-inline' requerido — todas las páginas tienen bloques <script>
+    #   con SweetAlert condicional generado por PHP. Moverlos a JS externo eliminaría esto.
     # style-src: 'unsafe-inline' requerido — SweetAlert2 inyecta estilos via JS
     # font-src: cdnjs para Font Awesome
     # frame-ancestors 'none': complementa X-Frame-Options para navegadores modernos
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 </IfModule>

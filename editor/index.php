@@ -21,10 +21,10 @@ include_once '../funciones/editores/editores_sesion.php';
                         <form id="loginForm" class="formulario" action="" method="POST">
                             <fieldset>
                                 <legend>Iniciar sesión</legend>
-                                <label>Usuario</label>
+                                <label for="usuario">Usuario</label>
                                 <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario">
 
-                                <label>Contraseña</label>
+                                <label for="clave">Contraseña</label>
                                 <input type="password" id="clave" name="clave" placeholder="Ingrese su clave">
 
                                 <button class="submit-button" type="submit">Iniciar</button>

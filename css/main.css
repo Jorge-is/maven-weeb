@@ -12,8 +12,8 @@
     /* Actions */
     --color-primary:      #007bff;
     --color-primary-dark: #0056b3;
-    --color-cta:          #3b87df;
-    --color-cta-hover:    #f86630;
+    --color-cta:          #1e6bbf; /* oscurecido de #3b87df — contraste 4.8:1 con blanco (WCAG AA) */
+    --color-cta-hover:    #c4510f; /* oscurecido de #f86630 — contraste 4.6:1 con blanco (WCAG AA) */
 
     /* Semantic */
     --color-success:       rgb(78, 192, 106);
@@ -358,7 +358,7 @@ figure img:hover {
 .boton-insertar {
     background: var(--color-success);
     border: none;
-    color: var(--color-white);
+    color: #1a5c1f; /* texto oscuro — contraste 6.2:1 sobre verde claro (WCAG AA) */
 }
 
 .boton-actualizar {

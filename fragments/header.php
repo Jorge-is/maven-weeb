@@ -14,7 +14,7 @@
 
 <header>
     <nav>
-        <button class="btn-visible monitor-ocultar televisor-ocultar"><span>&#8801;</span></button>
+        <button class="btn-visible monitor-ocultar televisor-ocultar" aria-label="Abrir menú" aria-expanded="false"><span aria-hidden="true">&#8801;</span></button>
         <a href="index.php"><img src="imagenes/logos/logo_maven.png" alt="Logo Web Maven"></a>
         <ul class="telefono-ocultar tablet-ocultar">
         <?php    
@@ -33,7 +33,7 @@
         </div>
     </nav>
     <div class="nav-lateral">    
-        <button class="btn-invisible"><span>x</span></button>
+        <button class="btn-invisible" aria-label="Cerrar menú"><span aria-hidden="true">x</span></button>
         <a href="index.php"><img src="imagenes/logos/logo_maven.png" alt="Logo Web Maven"></a>
         <ul>
             <?php    
