@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['funcion']) && $_POST['
         }
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }
 ?>

@@ -7,6 +7,6 @@ try {
     desconectar();
     return $cotizaciones;
 } catch (Exception $ex) {
-    die($ex->getMessage());
+    manejar_error($ex);
 }
 ?>

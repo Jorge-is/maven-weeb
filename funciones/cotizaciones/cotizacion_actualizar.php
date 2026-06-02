@@ -27,7 +27,7 @@ if (isset($_GET['id_cotizacion'])) {
             }
             desconectar();
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     } else {
         try {
@@ -38,13 +38,15 @@ if (isset($_GET['id_cotizacion'])) {
             if (count($cotizaciones) > 0) {
                 $cotizacion = $cotizaciones[0];
             } else {
-                die("Cotización no encontrada.");
+                error_log('[' . date('Y-m-d H:i:s') . '] Cotización no encontrada: id=' . $id_cotizacion);
+                die('Error interno del servidor. Por favor, intenta más tarde.');
             }
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     }
 } else {
-    die("ID de cotización no especificado.");
+    error_log('[' . date('Y-m-d H:i:s') . '] cotizacion_actualizar llamado sin id_cotizacion');
+    die('Error interno del servidor. Por favor, intenta más tarde.');
 }
 ?>

@@ -6,6 +6,6 @@ try {
     $clientes = consultar($sql);
     desconectar();
 } catch (Exception $ex) {
-    die($ex->getMessage());
+    manejar_error($ex);
 }
 ?>

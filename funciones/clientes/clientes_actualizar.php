@@ -50,7 +50,7 @@ if (isset($_POST['id_cliente']) && isset($_POST['funcion']) && $_POST['funcion']
             echo "Cliente actualizado exitosamente.";
             desconectar();
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     }
 }

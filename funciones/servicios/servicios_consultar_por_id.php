@@ -23,6 +23,6 @@ if (isset($_GET['id_servicio']) && $_GET['funcion'] == 'actualizar') {
             echo "Servicio no encontrado.";
         }
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }

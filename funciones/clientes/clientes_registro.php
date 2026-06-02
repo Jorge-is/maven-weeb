@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }
 ?>

@@ -8,5 +8,5 @@ try {
     return $blogs;
 } catch (Exception $ex) {
 
-    die($ex->getMessage());
+    manejar_error($ex);
 }

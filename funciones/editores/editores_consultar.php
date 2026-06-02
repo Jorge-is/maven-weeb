@@ -13,6 +13,6 @@ try {
         echo "Editor no encontrado.";
     }
 } catch (Exception $ex) {
-    die($ex->getMessage());
+    manejar_error($ex);
 }
 ?>

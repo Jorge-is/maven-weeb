@@ -27,6 +27,6 @@ if (isset($_GET['id_proyecto']) && $_GET['funcion'] == 'actualizar') {
             echo "Proyecto no encontrado.";
         }
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }

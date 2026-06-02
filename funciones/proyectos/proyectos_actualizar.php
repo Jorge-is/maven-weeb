@@ -40,7 +40,7 @@ if (isset($_POST['id_proyecto']) && isset($_GET['funcion']) && $_GET['funcion'] 
             }
             desconectar();
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     }
 }

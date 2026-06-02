@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_cliente']) && isset
         }
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 } else {
     echo "ID de cliente no especificado.";

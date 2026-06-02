@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['funcion']) && $_POST['
             unset($_SESSION['cotizaciones']);
             echo "Cotizaciones creadas exitosamente.";
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     } else {
         echo "No hay cotizaciones en la sesión para insertar.";

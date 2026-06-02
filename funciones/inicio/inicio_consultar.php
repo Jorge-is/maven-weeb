@@ -7,7 +7,7 @@ try {
     desconectar();
     return $inicio;
 } catch (Exception $ex) {
-    die($ex->getMessage());
+    manejar_error($ex);
 }
 
 ?>

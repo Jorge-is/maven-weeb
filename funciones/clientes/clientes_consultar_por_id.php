@@ -24,7 +24,7 @@ if (isset($_GET['id_cliente']) && $_GET['funcion'] == 'actualizar') {
             echo "Cliente no encontrado.";
         }
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }
 ?>

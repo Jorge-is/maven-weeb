@@ -1,6 +1,12 @@
 <?php
 date_default_timezone_set("America/Lima");
 
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/../logs/errors.log');
+error_reporting(E_ALL);
+
 (function () {
     $env_path = __DIR__ . '/../.env';
     if (!file_exists($env_path)) {
@@ -24,11 +30,21 @@ define('DB_PORT', $_ENV['DB_PORT'] ?? '3306');
 
 $cnx = null;
 
+function manejar_error(Throwable $ex, string $contexto = ''): void {
+    $entrada  = date('[Y-m-d H:i:s]');
+    $entrada .= $contexto !== '' ? " [{$contexto}]" : '';
+    $entrada .= ' ' . get_class($ex) . ': ' . $ex->getMessage();
+    $entrada .= ' en ' . $ex->getFile() . ':' . $ex->getLine();
+    error_log($entrada);
+    die('Error interno del servidor. Por favor, intenta más tarde.');
+}
+
 function conectar() {
     global $cnx;
     $cnx = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
     if ($cnx->connect_error) {
-        die("Conexión fallida: " . $cnx->connect_error);
+        error_log('[' . date('Y-m-d H:i:s') . '] DB connection failed: ' . $cnx->connect_error);
+        die('Error interno del servidor. Por favor, intenta más tarde.');
     }
     $cnx->set_charset("utf8");
 }

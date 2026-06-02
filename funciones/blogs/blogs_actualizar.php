@@ -38,6 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['funcion'] == 'actualizar') {
         }
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }

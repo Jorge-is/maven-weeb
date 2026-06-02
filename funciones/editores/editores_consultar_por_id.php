@@ -24,7 +24,7 @@ if (isset($_GET['id_editor']) && $_GET['funcion'] == 'actualizar') {
             echo "Editor no encontrado.";
         }
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }
 ?>

@@ -11,7 +11,7 @@ if (isset($_POST['id_cotizacion']) && isset($_POST['funcion']) && $_POST['funcio
         }
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 } else {
     echo "ID de cotización no especificado.";

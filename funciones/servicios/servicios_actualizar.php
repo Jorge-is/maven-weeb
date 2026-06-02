@@ -36,7 +36,7 @@ if (isset($_POST['id_servicio']) && isset($_POST['funcion']) && $_POST['funcion'
             }
             desconectar();
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     }
 }

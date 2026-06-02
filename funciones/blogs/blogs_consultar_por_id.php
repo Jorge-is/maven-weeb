@@ -28,6 +28,6 @@ if (isset($_GET['id_blog']) && $_GET['funcion'] == 'actualizar') {
             echo "Blog no encontrado.";
         }
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }

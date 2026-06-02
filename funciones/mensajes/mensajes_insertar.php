@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ejecutar_prep($sql, "sssss", $apellido, $nombre, $celular, $correo, $mensaje_texto);
         desconectar();
     } catch (Exception $ex) {
-        die($ex->getMessage());
+        manejar_error($ex);
     }
 }
 ?>

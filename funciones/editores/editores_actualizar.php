@@ -50,7 +50,7 @@ if (isset($_POST['id_editor']) && isset($_GET['funcion']) && $_GET['funcion'] ==
             echo "Editor actualizado exitosamente.";
             desconectar();
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            manejar_error($ex);
         }
     }
 }
