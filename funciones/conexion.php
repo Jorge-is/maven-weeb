@@ -58,6 +58,10 @@ function desconectar() {
 }
 
 function sesion_segura(): void {
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    header('Pragma: no-cache');
+    header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+
     if (session_status() !== PHP_SESSION_NONE) {
         return;
     }
@@ -69,6 +73,21 @@ function sesion_segura(): void {
         'samesite' => 'Strict',
     ]);
     session_start();
+}
+
+function redirigir_si_autenticado(): void {
+    if (isset($_SESSION["rol_cliente"])) {
+        header("Location: cliente/index.php");
+        exit();
+    }
+    if (isset($_SESSION["rol_administrador"])) {
+        header("Location: administrador/intranet.php");
+        exit();
+    }
+    if (isset($_SESSION["rol_editor"])) {
+        header("Location: editor/intranet.php");
+        exit();
+    }
 }
 
 function csrf_token(): string {
