@@ -1,0 +1,25 @@
+{
+  "name": "maven-web",
+  "version": "1.0.0",
+  "description": "Sitio web corporativo para una agencia de diseño y desarrollo web. Permite a la empresa gestionar su contenido (proyectos, servicios, blog, empresa) y a los clientes solicitar cotizaciones en línea.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jorge-is/maven-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jorge-is/maven-web/issues"
+  },
+  "homepage": "https://github.com/Jorge-is/maven-web#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}
