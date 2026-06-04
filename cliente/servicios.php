@@ -1,10 +1,10 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_cliente"]) || $_SESSION["rol_cliente"] !== "clientes") {
     header("Location: ../iniciar_sesion.php");
     exit();
 }
-include_once '../funciones/conexion.php';
 include_once '../funciones/servicios/servicios_consultar.php';
 
 $id_cliente = (int)$_SESSION["id_cliente"];

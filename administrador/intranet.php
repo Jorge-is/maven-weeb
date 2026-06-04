@@ -1,4 +1,5 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");

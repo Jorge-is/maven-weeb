@@ -1,10 +1,10 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_editor"]) || $_SESSION["rol_editor"] !== "editores") {
     header("Location: index.php");
     exit();
 }
-include_once '../funciones/conexion.php';
 include_once '../funciones/inicio/inicio_consultar.php';
 include_once '../funciones/inicio/inicio_actualizar.php';
 ?>

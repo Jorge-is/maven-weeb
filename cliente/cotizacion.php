@@ -1,10 +1,10 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_cliente"]) || $_SESSION["rol_cliente"] !== "clientes") {
     header("Location: ../iniciar_sesion.php");
     exit();
 }
-include_once '../funciones/conexion.php';
 include_once '../funciones/cotizaciones/cotizacion_lista_eliminar.php';
 include_once '../funciones/cotizaciones/cotizacion_lista_insertar.php';
 include_once '../funciones/cotizaciones/cotizacion_insertar_lista.php';

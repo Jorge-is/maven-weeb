@@ -1,10 +1,10 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_editor"]) || $_SESSION["rol_editor"] !== "editores") {
     header("Location: index.php");
     exit();
 }
-include_once '../funciones/conexion.php';
 include_once '../funciones/proyectos/proyectos_actualizar.php';
 include_once '../funciones/proyectos/proyectos_eliminar.php';
 include_once '../funciones/proyectos/proyectos_insertar.php';

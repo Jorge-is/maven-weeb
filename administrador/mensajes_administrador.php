@@ -1,10 +1,10 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_administrador"]) || $_SESSION["rol_administrador"] !== "administradores") {
     header("Location: index.php");
     exit();
 }
-include_once '../funciones/conexion.php';
 include_once '../funciones/mensajes/mensajes_eliminar.php';
 include_once '../funciones/mensajes/mensajes_consultar.php';
 ?>

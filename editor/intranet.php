@@ -1,4 +1,5 @@
 <?php
+include_once '../funciones/conexion.php';
 sesion_segura();
 if (!isset($_SESSION["rol_editor"]) || $_SESSION["rol_editor"] !== "editores") {
     header("Location: ../index.php");
