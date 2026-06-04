@@ -50,7 +50,7 @@
     --radius-pill: 20px;
 
     /* Typography */
-    --font-sans: Arial, sans-serif;
+    --font-sans: 'Inter', Arial, sans-serif;
 
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -68,6 +68,8 @@
 body {
     font-family: var(--font-sans);
     background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
 }
@@ -111,6 +113,14 @@ figure img:hover {
     font-weight: bold;
     color: var(--color-primary);
     margin-top: 0.5rem;
+}
+
+.empty-state {
+    width: 100%;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    padding: 60px 20px;
 }
 
 /* ============================================================
@@ -257,11 +267,13 @@ figure img:hover {
     margin-bottom: 20px;
     border: 1px solid var(--color-border-light);
     text-align: center;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .tarjeta:hover {
     box-shadow: var(--shadow-md);
     background-color: var(--color-white);
+    transform: translateY(-4px);
 }
 
 .tarjeta figure img {
@@ -322,7 +334,8 @@ figure img:hover {
 }
 
 .btn:focus {
-    outline: none;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .btn:disabled {
@@ -355,15 +368,29 @@ figure img:hover {
     border: none;
 }
 
+.boton-eliminar:hover {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
 .boton-insertar {
     background: var(--color-success);
     border: none;
-    color: #1a5c1f; /* texto oscuro — contraste 6.2:1 sobre verde claro (WCAG AA) */
+    color: #1a5c1f;
+}
+
+.boton-insertar:hover {
+    background: #34a85a;
+    color: var(--color-white);
 }
 
 .boton-actualizar {
     background: var(--color-warning);
     border: none;
+}
+
+.boton-actualizar:hover {
+    background: #e6b800;
 }
 
 .boton-primario {
@@ -372,8 +399,16 @@ figure img:hover {
     color: var(--color-white);
 }
 
+.boton-primario:hover {
+    background: var(--color-cta-hover);
+}
+
 .boton-secundario {
     background: var(--color-neutral);
     border: none;
     color: var(--color-bg);
+}
+
+.boton-secundario:hover {
+    background: #6b6969;
 }

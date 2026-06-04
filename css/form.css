@@ -28,43 +28,75 @@
 
 .formulario fieldset {
     border-radius: var(--radius-xl);
-    border: 2px solid var(--color-form-border);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
     justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 24px 32px;
     width: 80%;
+    background: var(--color-white);
 }
 
 .formulario legend {
     color: var(--color-form-legend);
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 0.4rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0 12px;
+    margin-bottom: 0.5rem;
     text-align: center;
+}
+
+.formulario label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    align-self: flex-start;
+    margin-bottom: 2px;
 }
 
 .formulario input {
     font-family: var(--font-sans);
+    font-size: 0.95rem;
     background: var(--color-white);
     width: 95%;
-    height: 30px;
+    height: 36px;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-input-border);
-    margin: 10px 0 20px;
+    padding: 0 12px;
+    margin: 6px 0 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.18);
 }
 
 .formulario textarea {
     font-family: var(--font-sans);
+    font-size: 0.95rem;
     border-radius: var(--radius-lg);
-    padding: 5px;
+    padding: 10px 12px;
     border: 1px solid var(--color-input-border);
     background: var(--color-white);
-    width: 99%;
+    width: 95%;
     height: 50%;
-    margin: 10px 0 20px;
+    margin: 6px 0 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.18);
 }
 
 .submit-button a {
@@ -89,7 +121,12 @@
 
 .submit-button:hover {
     background-color: var(--color-cta-hover);
-    transform: scale(1.09);
+    transform: scale(1.03);
+}
+
+.submit-button:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
 }
 
 .mapa iframe {

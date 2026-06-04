@@ -34,8 +34,20 @@ footer .fila {
 footer a {
     text-decoration: none;
     color: var(--color-white);
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+footer a:hover {
+    color: #a8c8ff;
 }
 
 footer a img {
     margin-left: 10px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+footer a:hover img {
+    opacity: 0.85;
+    transform: scale(1.1);
+    text-decoration: none;
 }
