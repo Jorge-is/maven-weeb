@@ -4,4 +4,4 @@
     </div>
 </footer>
 <script src="../js/index.js"></script>
-<script src="js/alerta.js"></script>
+<script src="../js/alerta.js"></script>
