@@ -26,6 +26,7 @@ include_once '../funciones/editores/editores_sesion.php';
                         <form id="loginForm" class="formulario" action="" method="POST">
                             <fieldset>
                                 <legend>Iniciar sesión</legend>
+                                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
                                 <label for="usuario">Usuario</label>
                                 <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario">
 

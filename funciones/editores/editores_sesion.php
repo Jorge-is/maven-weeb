@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuarioValido = false;
 
         foreach ($usuarios as $usuarioDb) {
-            if ($usuarioDb['usuario'] === $usuario && password_verify($clave, $usuarioDb['clave'])) {
+            if (password_verify($clave, $usuarioDb['clave'])) {
                 session_regenerate_id(true);
                 $_SESSION["id_editor"]     = $usuarioDb['id_editor'];
                 $_SESSION["nombre_editor"]  = $usuarioDb['nombre'];
