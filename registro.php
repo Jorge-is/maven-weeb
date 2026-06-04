@@ -1,6 +1,7 @@
 <?php
 include_once 'funciones/conexion.php';
 sesion_segura();
+redirigir_si_autenticado();
 include_once 'funciones/clientes/clientes_registro.php';
 ?>
 <!DOCTYPE html>

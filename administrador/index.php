@@ -1,6 +1,10 @@
 <?php
 include_once '../funciones/conexion.php';
 sesion_segura();
+if (isset($_SESSION["rol_administrador"]) && $_SESSION["rol_administrador"] === "administradores") {
+    header("Location: intranet.php");
+    exit();
+}
 include_once '../funciones/administradores/administradores_sesion.php';
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,10 @@
 <?php
 include_once '../funciones/conexion.php';
+sesion_segura();
+if (isset($_SESSION["rol_editor"]) && $_SESSION["rol_editor"] === "editores") {
+    header("Location: intranet.php");
+    exit();
+}
 include_once '../funciones/editores/editores_sesion.php';
 ?>
 
