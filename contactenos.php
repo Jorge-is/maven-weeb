@@ -1,6 +1,7 @@
 <?php
 include_once 'funciones/conexion.php';
 sesion_segura();
+redirigir_si_autenticado();
 include_once 'funciones/empresa/empresa_consultar.php';
 // include_once 'funciones/mensaje/mensaje_consultar.php';
 include_once 'funciones/mensajes/mensajes_insertar.php';

@@ -1,5 +1,7 @@
 <?php
 include_once 'funciones/conexion.php';
+sesion_segura();
+redirigir_si_autenticado();
 include_once 'funciones/servicios/servicios_consultar.php';
 ?>
 <!DOCTYPE html>
