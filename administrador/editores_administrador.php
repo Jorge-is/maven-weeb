@@ -71,11 +71,11 @@ $actualizando = isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar';
                                 <tbody>
                                     <?php foreach ($editores as $editor): ?>
                                         <tr>
-                                            <td><?php echo e($editor['apellido']); ?></td>
-                                            <td><?php echo e($editor['nombre']); ?></td>
-                                            <td><?php echo e($editor['correo']); ?></td>
-                                            <td><?php echo e($editor['usuario']); ?></td>
-                                            <td><?php echo (int)$editor['id_administrador']; ?></td>
+                                            <td data-label="Apellido"><?php echo e($editor['apellido']); ?></td>
+                                            <td data-label="Nombre"><?php echo e($editor['nombre']); ?></td>
+                                            <td data-label="Correo"><?php echo e($editor['correo']); ?></td>
+                                            <td data-label="Usuario"><?php echo e($editor['usuario']); ?></td>
+                                            <td data-label="Admin"><?php echo (int)$editor['id_administrador']; ?></td>
                                             <td>
                                                 <a href="editores_administrador.php?id_editor=<?php echo (int)$editor['id_editor']; ?>&funcion=actualizar">
                                                     <button class="boton boton-actualizar">Actualizar</button>

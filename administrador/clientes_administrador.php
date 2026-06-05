@@ -69,10 +69,10 @@ $actualizando = isset($_GET['funcion']) && $_GET['funcion'] === 'actualizar';
                                 <tbody>
                                     <?php foreach ($clientes as $cliente): ?>
                                         <tr>
-                                            <td><?php echo e($cliente['apellido']); ?></td>
-                                            <td><?php echo e($cliente['nombre']); ?></td>
-                                            <td><?php echo e($cliente['correo']); ?></td>
-                                            <td><?php echo e($cliente['usuario']); ?></td>
+                                            <td data-label="Apellido"><?php echo e($cliente['apellido']); ?></td>
+                                            <td data-label="Nombre"><?php echo e($cliente['nombre']); ?></td>
+                                            <td data-label="Correo"><?php echo e($cliente['correo']); ?></td>
+                                            <td data-label="Usuario"><?php echo e($cliente['usuario']); ?></td>
                                             <td>
                                                 <a href="clientes_administrador.php?id_cliente=<?php echo (int)$cliente['id_cliente']; ?>&funcion=actualizar">
                                                     <button class="boton boton-actualizar">Actualizar</button>

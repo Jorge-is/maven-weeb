@@ -71,12 +71,12 @@ include_once '../funciones/proyectos/proyectos_consultar.php';
                                 <tbody>
                                     <?php foreach ($proyectos as $proyecto): ?>
                                         <tr>
-                                            <td><?php echo e($proyecto['nombre']); ?></td>
-                                            <td><?php echo e($proyecto['detalle']); ?></td>
-                                            <td><img src="../<?php echo e($proyecto['imagen']); ?>" alt="Imagen del proyecto" width="50" height="50"></td>
-                                            <td><?php echo e($proyecto['rubro']); ?></td>
-                                            <td><?php echo e($proyecto['fecha']); ?></td>
-                                            <td><?php echo (int)$proyecto['id_editor']; ?></td>
+                                            <td data-label="Nombre"><?php echo e($proyecto['nombre']); ?></td>
+                                            <td data-label="Detalle"><?php echo e($proyecto['detalle']); ?></td>
+                                            <td data-label="Imagen"><img src="../<?php echo e($proyecto['imagen']); ?>" alt="Imagen del proyecto" width="50" height="50"></td>
+                                            <td data-label="Rubro"><?php echo e($proyecto['rubro']); ?></td>
+                                            <td data-label="Fecha"><?php echo e($proyecto['fecha']); ?></td>
+                                            <td data-label="Editor"><?php echo (int)$proyecto['id_editor']; ?></td>
                                             <td>
                                                 <a href="proyecto_gestionar.php?id_proyecto=<?php echo (int)$proyecto['id_proyecto']; ?>&funcion=actualizar">
                                                     <button class="boton boton-actualizar">Actualizar</button>

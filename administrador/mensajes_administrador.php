@@ -37,11 +37,11 @@ include_once '../funciones/mensajes/mensajes_consultar.php';
                                 <tbody>
                                     <?php foreach ($mensajes as $mensaje): ?>
                                         <tr>
-                                            <td><?php echo e($mensaje['apellido']); ?></td>
-                                            <td><?php echo e($mensaje['nombre']); ?></td>
-                                            <td><?php echo e($mensaje['celular']); ?></td>
-                                            <td><?php echo e($mensaje['correo']); ?></td>
-                                            <td><?php echo e($mensaje['mensaje_texto']); ?></td>
+                                            <td data-label="Apellido"><?php echo e($mensaje['apellido']); ?></td>
+                                            <td data-label="Nombre"><?php echo e($mensaje['nombre']); ?></td>
+                                            <td data-label="Teléfono"><?php echo e($mensaje['celular']); ?></td>
+                                            <td data-label="Correo"><?php echo e($mensaje['correo']); ?></td>
+                                            <td data-label="Mensaje"><?php echo e($mensaje['mensaje_texto']); ?></td>
                                             <td>
                                                 <form method="POST" action="mensajes_administrador.php" onsubmit="return confirm('¿Estás seguro de eliminar este mensaje?');" style="display:inline;">
                                                     <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">

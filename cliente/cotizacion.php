@@ -75,11 +75,11 @@ include_once '../funciones/cotizaciones/cotizacion_lista_total.php';
                                     <?php if (isset($_SESSION['cotizaciones']) && !empty($_SESSION['cotizaciones'])): ?>
                                         <?php foreach ($_SESSION['cotizaciones'] as $key => $cotizacion): ?>
                                             <tr>
-                                                <td><?php echo (int)$cotizacion['id_cliente']; ?></td>
-                                                <td><?php echo (int)$cotizacion['id_servicio']; ?></td>
-                                                <td><?php echo e($cotizacion['nombre_servicio']); ?></td>
-                                                <td><?php echo e($cotizacion['detalle_servicio']); ?></td>
-                                                <td>S/.<?php echo number_format((float)$cotizacion['precio'], 2); ?></td>
+                                                <td data-label="Cliente"><?php echo (int)$cotizacion['id_cliente']; ?></td>
+                                                <td data-label="Servicio"><?php echo (int)$cotizacion['id_servicio']; ?></td>
+                                                <td data-label="Nombre"><?php echo e($cotizacion['nombre_servicio']); ?></td>
+                                                <td data-label="Detalle"><?php echo e($cotizacion['detalle_servicio']); ?></td>
+                                                <td data-label="Precio">S/.<?php echo number_format((float)$cotizacion['precio'], 2); ?></td>
                                                 <td>
                                                     <form method="POST" action="cotizacion.php" onsubmit="return confirm('¿Estás seguro de eliminar esta cotización?');" style="display:inline;">
                                                         <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">

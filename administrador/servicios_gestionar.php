@@ -63,9 +63,9 @@ include_once '../funciones/servicios/servicios_consultar.php';
                                 <tbody>
                                     <?php foreach ($servicios as $servicio): ?>
                                         <tr>
-                                            <td><?php echo e($servicio['nombre']); ?></td>
-                                            <td><?php echo e($servicio['detalle']); ?></td>
-                                            <td><?php echo e($servicio['precio']); ?></td>
+                                            <td data-label="Nombre"><?php echo e($servicio['nombre']); ?></td>
+                                            <td data-label="Detalle"><?php echo e($servicio['detalle']); ?></td>
+                                            <td data-label="Precio"><?php echo e($servicio['precio']); ?></td>
                                             <td>
                                                 <a href="servicios_gestionar.php?id_servicio=<?php echo (int)$servicio['id_servicio']; ?>&funcion=actualizar">
                                                     <button class="boton boton-actualizar">Actualizar</button>

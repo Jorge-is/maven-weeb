@@ -71,12 +71,12 @@ include_once '../funciones/blogs/blogs_consultar.php';
                                 <tbody>
                                     <?php foreach ($blogs as $blog): ?>
                                         <tr>
-                                            <td><?php echo e($blog['titulo']); ?></td>
-                                            <td><img src="<?php echo e($blog['imagen']); ?>" alt="Imagen del blog" width="50" height="50"></td>
-                                            <td><?php echo e($blog['contenido']); ?></td>
-                                            <td><?php echo e($blog['fecha']); ?></td>
-                                            <td><?php echo e($blog['hora']); ?></td>
-                                            <td><?php echo (int)$blog['id_editor']; ?></td>
+                                            <td data-label="Título"><?php echo e($blog['titulo']); ?></td>
+                                            <td data-label="Imagen"><img src="<?php echo e($blog['imagen']); ?>" alt="Imagen del blog" width="50" height="50"></td>
+                                            <td data-label="Contenido"><?php echo e($blog['contenido']); ?></td>
+                                            <td data-label="Fecha"><?php echo e($blog['fecha']); ?></td>
+                                            <td data-label="Hora"><?php echo e($blog['hora']); ?></td>
+                                            <td data-label="Editor"><?php echo (int)$blog['id_editor']; ?></td>
                                             <td>
                                                 <a href="blogs_gestionar.php?id_blog=<?php echo (int)$blog['id_blog']; ?>&funcion=actualizar">
                                                     <button class="boton boton-actualizar">Actualizar</button>

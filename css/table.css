@@ -6,10 +6,12 @@
 
 .table-wrapper {
     width: 100%;
+    min-width: 0;
     height: 400px;
     overflow-x: auto;
     overflow-y: auto;
     border-radius: var(--radius-md);
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -32,6 +34,9 @@ table th {
     background-color: var(--color-table-header);
     color: var(--color-white);
     font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 table td {
@@ -55,4 +60,106 @@ table tr:hover {
 
 table a {
     text-decoration: none;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLA MÓVIL (≤ 1023px)
+   Card pattern: cada fila se convierte en tarjeta
+   ============================================================ */
+@media (max-width: 1023px) {
+
+    .table-wrapper {
+        height: auto;
+        max-height: none;
+        overflow-x: visible;
+        overflow-y: visible;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Thead oculto: las etiquetas vienen de data-label en cada td */
+    table thead {
+        display: none;
+    }
+
+    /* Cada fila = tarjeta */
+    table,
+    table tbody,
+    table tr {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 12px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-sm);
+    }
+
+    table tr:nth-child(even) {
+        background-color: var(--color-white);
+    }
+
+    table tr:hover {
+        background-color: var(--color-white);
+    }
+
+    /* Cada celda = fila label + valor */
+    table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid var(--color-border);
+        font-size: 0.9rem;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    table td:last-child a,
+    table td:last-child form {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+
+    /* Etiqueta desde data-label */
+    table td[data-label]::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.78rem;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-align: left;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* Celda de acciones sin etiqueta */
+    table td:not([data-label]) {
+        justify-content: center;
+        border-top: 1px solid var(--color-border);
+        padding: 10px 14px;
+    }
+
+    /* Imágenes dentro de tarjetas */
+    table td img {
+        max-width: 60px;
+        max-height: 60px;
+        border-radius: var(--radius-sm);
+        object-fit: cover;
+    }
 }
