@@ -1,47 +1,75 @@
+/* ============================================================
+   TABLA — heading y layout del wrapper
+   ============================================================ */
 .titulo-tabla {
-    font-size: 20px;
-    text-align: center;
-    margin: 5px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-align: left;
+    margin: 0 0 var(--space-2);
+    color: var(--color-text);
+    border-left: 3px solid var(--color-primary);
+    padding-left: var(--space-3);
+}
+
+.jumbo-tabla {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
 }
 
 .table-wrapper {
     width: 100%;
     min-width: 0;
-    height: 400px;
+    height: 440px;
     overflow-x: auto;
     overflow-y: auto;
-    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     -webkit-overflow-scrolling: touch;
 }
 
+/* ============================================================
+   TABLA — estructura base
+   ============================================================ */
 table {
     width: 100%;
-    margin: 0 auto;
     border-collapse: collapse;
     background-color: var(--color-surface);
-    box-shadow: var(--shadow-sm);
-    border-radius: var(--radius-md);
-    overflow: hidden;
 }
 
-table th, table td {
-    padding: 15px 9px;
-    text-align: center;
-    border: 1px solid var(--color-border);
+table th,
+table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
 }
 
 table th {
     background-color: var(--color-table-header);
     color: var(--color-white);
-    font-weight: bold;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     position: sticky;
     top: 0;
     z-index: 1;
+    border-bottom: none;
 }
 
 table td {
     color: var(--color-text);
+    font-size: 0.875rem;
     word-wrap: break-word;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table tr {
+    transition: background-color 0.15s ease;
 }
 
 table tr:nth-child(even) {
@@ -50,6 +78,13 @@ table tr:nth-child(even) {
 
 table tr:hover {
     background-color: var(--color-hover);
+}
+
+/* Botones de acción dentro de celdas */
+table td .boton {
+    padding: 5px 14px;
+    font-size: 0.8rem;
+    margin: 2px 3px;
 }
 
 .check {
@@ -73,8 +108,8 @@ table a {
         max-height: none;
         overflow-x: visible;
         overflow-y: visible;
+        border: none;
         border-radius: 0;
-        box-shadow: none;
     }
 
     /* Thead oculto: las etiquetas vienen de data-label en cada td */
@@ -91,7 +126,7 @@ table a {
     }
 
     table tr {
-        margin-bottom: 12px;
+        margin-bottom: var(--space-3);
         border: 1px solid var(--color-border);
         border-radius: var(--radius-md);
         overflow: hidden;
@@ -112,7 +147,7 @@ table a {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 12px;
+        gap: var(--space-3);
         padding: 10px 14px;
         text-align: right;
         border: none;
@@ -125,7 +160,7 @@ table a {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: var(--space-2);
     }
 
     table td:last-child a,
@@ -133,6 +168,12 @@ table a {
         display: flex;
         align-items: center;
         margin: 0;
+    }
+
+    /* Restaurar tamaño de botones en mobile */
+    table td .boton {
+        padding: 5px 12px;
+        font-size: 0.875rem;
     }
 
     /* Etiqueta desde data-label */
