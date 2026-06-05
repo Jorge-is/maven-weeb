@@ -91,6 +91,7 @@
     margin: 6px 0 16px;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
 }
 
 .formulario textarea:focus {

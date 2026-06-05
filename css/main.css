@@ -276,9 +276,20 @@ figure img:hover {
     transform: translateY(-4px);
 }
 
+.tarjeta > div:first-child {
+    overflow: hidden;
+    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+}
+
 .tarjeta figure img {
     width: 300px;
     height: 200px;
+    border-radius: 0;
+}
+
+.tarjeta figure img:hover {
+    transform: scale(1.05);
+    border-radius: 0;
 }
 
 .tarjeta-info {
