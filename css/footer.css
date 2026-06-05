@@ -4,16 +4,16 @@
 footer {
     background: linear-gradient(180deg, var(--color-footer-start) 0%, var(--color-footer-end) 100%);
     color: rgba(255, 255, 255, 0.8);
-    margin-top: 60px;
+    margin-top: var(--space-15);
 }
 
 .footer-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 56px 40px 40px;
+    padding: var(--space-14) var(--space-10) var(--space-10);
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 48px;
+    gap: var(--space-12);
 }
 
 /* ── Brand column ─────────────────────────────────────────── */
@@ -37,7 +37,7 @@ footer {
     font-size: 0.85rem;
     line-height: 1.75;
     color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-6);
     max-width: 280px;
 }
 
@@ -94,7 +94,7 @@ footer {
     font-size: 0.875rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
@@ -113,7 +113,7 @@ footer {
 /* ── Bottom bar ───────────────────────────────────────────── */
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 18px 40px;
+    padding: var(--space-4) var(--space-10);
     text-align: center;
     font-size: 0.78rem;
     color: rgba(255, 255, 255, 0.35);
@@ -137,12 +137,12 @@ footer {
 @media (max-width: 520px) {
     .footer-inner {
         grid-template-columns: 1fr;
-        padding: 40px 24px 32px;
+        padding: var(--space-10) var(--space-6) var(--space-8);
     }
     .footer-brand {
         grid-column: auto;
     }
     .footer-bottom {
-        padding: 16px 24px;
+        padding: var(--space-4) var(--space-6);
     }
 }
