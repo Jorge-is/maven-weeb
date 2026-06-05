@@ -43,7 +43,7 @@
     </div>
 
     <div class="footer-bottom">
-        MAVEN WEEB &reg; <?php echo date('Y'); ?> &mdash; Todos los derechos reservados
+        MAVEN WEEB &reg; 2024 &mdash; Todos los derechos reservados
     </div>
 </footer>
 <script src="../js/index.js"></script>

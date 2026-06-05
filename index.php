@@ -7,7 +7,7 @@ include_once 'funciones/inicio/inicio_consultar.php';
 <!DOCTYPE html>
 <html lang="ES">
 <head>
-    <title>WEEB MAVEN | Inicio</title>
+    <title>MAVEN WEEB | Inicio</title>
     <?php require_once './fragments/links.php'; ?>
 </head>
 <body>
