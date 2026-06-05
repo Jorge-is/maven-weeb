@@ -1,18 +1,36 @@
-function visible() {
-    const navLateral = document.querySelector('.nav-lateral');
-    navLateral.style.marginLeft = '0px';
-    navLateral.style.transition = '0.5s';
-}
-function invisible() {
-    const navLateral = document.querySelector('.nav-lateral');
-    navLateral.style.marginLeft = '-300px';
-    navLateral.style.transition = '0.5s';
-}
+(function () {
+    const toggle  = document.querySelector('.nav-toggle');
+    const close   = document.querySelector('.nav-close');
+    const lateral = document.querySelector('.nav-lateral');
+    const overlay = document.querySelector('.nav-overlay');
 
+    if (!toggle || !lateral) return;
 
-const botonVisible = document.querySelector('.btn-visible');
-const botonInvisible = document.querySelector('.btn-invisible');
+    function openNav() {
+        lateral.classList.add('nav-lateral--open');
+        lateral.setAttribute('aria-hidden', 'false');
+        if (overlay) overlay.classList.add('nav-overlay--visible');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        if (close) close.focus();
+    }
 
-botonVisible.addEventListener('click', () => { visible(); });
+    function closeNav() {
+        lateral.classList.remove('nav-lateral--open');
+        lateral.setAttribute('aria-hidden', 'true');
+        if (overlay) overlay.classList.remove('nav-overlay--visible');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        toggle.focus();
+    }
 
-botonInvisible.addEventListener('click', () => { invisible(); });
+    toggle.addEventListener('click', openNav);
+    if (close)   close.addEventListener('click', closeNav);
+    if (overlay) overlay.addEventListener('click', closeNav);
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lateral.classList.contains('nav-lateral--open')) {
+            closeNav();
+        }
+    });
+})();
