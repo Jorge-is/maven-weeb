@@ -3,44 +3,49 @@
    ============================================================ */
 :root {
     /* Brand */
-    --color-nav:          #002261;
-    --color-nav-hover:    #0f52a1;
-    --color-footer-start: #1e3d77;
-    --color-footer-end:   #0a0f18;
-    --color-table-header: #09509c;
+    --color-nav:          #0f172a;
+    --color-nav-hover:    #1e293b;
+    --color-nav-active:   #93c5fd; /* light blue — visible sobre fondo slate-900 */
+    --color-footer-start: #1e293b;
+    --color-footer-end:   #020617;
+    --color-table-header: #3451d1;
 
     /* Actions */
-    --color-primary:      #007bff;
-    --color-primary-dark: #0056b3;
-    --color-cta:          #1e6bbf; /* oscurecido de #3b87df — contraste 4.8:1 con blanco (WCAG AA) */
-    --color-cta-hover:    #c4510f; /* oscurecido de #f86630 — contraste 4.6:1 con blanco (WCAG AA) */
+    --color-primary:       #4361ee;
+    --color-primary-dark:  #3451d1;
+    --color-primary-wash:  #eef2ff; /* indigo-50 — para fondos de estado activo */
+    --color-cta:           #3451d1; /* blue-indigo — contraste 6.5:1 con blanco (WCAG AA) */
+    --color-cta-hover:     #2a41b0; /* blue-indigo dark — contraste 8.2:1 con blanco (WCAG AA) */
 
     /* Semantic */
     --color-success:       rgb(78, 192, 106);
+    --color-success-text:  #1a5c1f;
+    --color-success-dark:  #34a85a;
     --color-warning:       rgb(255, 227, 128);
+    --color-warning-dark:  #e6b800;
     --color-danger:        #f44336;
     --color-danger-light:  rgb(255, 134, 134);
     --color-danger-dark:   #d32f2f;
 
     /* Neutral */
-    --color-bg:            #f5f5f5;
+    --color-bg:            #f8fafc;
     --color-white:         #ffffff;
-    --color-surface:       #f8f9fa;
-    --color-text:          #343a40;
-    --color-text-muted:    #666666;
-    --color-border:        #dee2e6;
-    --color-border-light:  #c7c7c7;
-    --color-separator:     #aaaaaa;
-    --color-disabled:      #cccccc;
-    --color-neutral:       #908e8e;
-    --color-hover:         #e9ecef;
-    --color-stripe:        #f2f2f2;
+    --color-surface:       #ffffff;
+    --color-text:          #0f172a;
+    --color-text-muted:    #64748b;
+    --color-border:        #e2e8f0;
+    --color-border-light:  #cbd5e1;
+    --color-separator:     #94a3b8;
+    --color-disabled:      #cbd5e1;
+    --color-neutral:       #94a3b8;
+    --color-hover:         #f1f5f9;
+    --color-stripe:        #f8fafc;
 
     /* Form */
-    --color-form-legend:  #151549;
-    --color-form-border:  rgb(6, 50, 146);
-    --color-form-link:    rgb(69, 78, 212);
-    --color-input-border: rgb(99, 99, 99);
+    --color-form-legend:  #1a2a7a;
+    --color-form-border:  #3451d1;
+    --color-form-link:    #4361ee;
+    --color-input-border: #64748b;
 
     /* Border radius */
     --radius-sm:   5px;
@@ -53,13 +58,27 @@
     --font-sans: 'Inter', Arial, sans-serif;
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 10px 20px rgba(15, 23, 42, 0.14);
 
     /* Transitions */
     --transition-bg:        background-color 0.3s ease;
     --transition-transform: transform 0.2s ease;
     --transition-img:       all 0.5s;
+
+    /* Spacing scale (base 4px) */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-14: 56px;
+    --space-15: 60px;
+    --space-16: 64px;
 }
 
 /* ============================================================
@@ -72,17 +91,23 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h2 {
     text-align: center;
     font-size: 2.5rem;
-    margin: 20px 0;
+    margin: var(--space-5) 0;
 }
 
 .container {
-    max-width: 90%;
+    max-width: 1280px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 var(--space-5);
+    box-sizing: border-box;
 }
 
 .row {
@@ -120,7 +145,7 @@ figure img:hover {
     text-align: center;
     color: var(--color-text-muted);
     font-size: 1.1rem;
-    padding: 60px 20px;
+    padding: var(--space-15) var(--space-5);
 }
 
 /* ============================================================
@@ -159,7 +184,7 @@ figure img:hover {
 
 .titulo-1 {
     width: 100%;
-    margin: 20px;
+    margin: var(--space-5);
     text-align: center;
 }
 
@@ -168,22 +193,30 @@ figure img:hover {
 }
 
 .jumbo article .jumbo-info {
-    width: 600px;
-    margin: 20px;
+    flex: 1 1 min(600px, 100%);
+    min-width: 0;
+    max-width: 600px;
+    margin: var(--space-5);
 }
 
 .jumbo article .jumbo-img {
-    width: 560px;
-    margin: 20px;
+    flex: 1 1 min(560px, 100%);
+    min-width: 0;
+    max-width: 560px;
+    margin: var(--space-5);
 }
 
 .jumbo article .jumbo-form {
-    width: 400px;
+    flex: 1 1 min(400px, 100%);
+    min-width: 0;
+    max-width: 400px;
     margin: 5px;
 }
 
 .jumbo article .jumbo-tabla {
-    width: 800px;
+    flex: 1 1 min(800px, 100%);
+    min-width: 0;
+    max-width: 800px;
     margin: 5px;
 }
 
@@ -194,18 +227,19 @@ figure img:hover {
 
 .album {
     background: none;
-    margin-top: 20px;
+    margin-top: var(--space-5);
 }
 
 .album article {
-    width: 1200px;
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: var(--space-5);
 }
 
 .album img {
     width: 250px;
     height: 250px;
-    margin: 0 20px;
+    margin: 0 var(--space-5);
 }
 
 .album p {
@@ -218,14 +252,15 @@ figure img:hover {
    ============================================================ */
 .jumbo-2 article .lado-1 {
     background: linear-gradient(45deg, #ffcc00, #ff7e3d);
-    width: 600px;
+    flex: 1 1 min(600px, 100%);
+    min-width: 0;
 }
 
 .lado-1 img,
 .lado-2 img {
     width: 250px;
     height: 250px;
-    margin: 20px;
+    margin: var(--space-5);
 }
 
 .lado-1 h2,
@@ -241,8 +276,9 @@ figure img:hover {
 }
 
 .jumbo-2 article .lado-2 {
-    background: linear-gradient(45deg, #6cbcfd, #2421ca);
-    width: 600px;
+    background: linear-gradient(45deg, #93c5fd, #3451d1);
+    flex: 1 1 min(600px, 100%);
+    min-width: 0;
 }
 
 .lado-2 h2,
@@ -261,10 +297,10 @@ figure img:hover {
    CARDS
    ============================================================ */
 .tarjeta {
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-xl);
     background-color: var(--color-white);
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-right: var(--space-5);
+    margin-bottom: var(--space-5);
     border: 1px solid var(--color-border-light);
     text-align: center;
     transition: box-shadow 0.25s ease, transform 0.25s ease;
@@ -278,15 +314,15 @@ figure img:hover {
 
 .tarjeta > div:first-child {
     overflow: hidden;
-    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .tarjeta figure img {
-    width: 300px;
+    width: 100%;
     height: 200px;
     border-radius: 0;
     padding-top: 5px;
-    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .tarjeta figure img:hover {
@@ -302,15 +338,14 @@ figure img:hover {
 
 .tarjeta-info-2 {
     width: 275px;
-    height: 800px;
-    padding: 20px;
+    padding: var(--space-5);
     line-height: 2;
     text-align: center;
 }
 
 .tarjeta-info-275 {
     width: 275px;
-    padding: 20px;
+    padding: var(--space-5);
     line-height: 2;
     text-align: center;
 }
@@ -330,6 +365,8 @@ figure img:hover {
 /* ============================================================
    BUTTONS
    ============================================================ */
+
+/* Full-width block button */
 .btn {
     display: block;
     width: 100%;
@@ -339,6 +376,7 @@ figure img:hover {
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
+    font-weight: 600;
     transition: var(--transition-bg);
 }
 
@@ -346,7 +384,7 @@ figure img:hover {
     background-color: var(--color-primary-dark);
 }
 
-.btn:focus {
+.btn:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
@@ -356,29 +394,52 @@ figure img:hover {
     cursor: not-allowed;
 }
 
+/* Inline pill buttons — base shares all common properties */
 .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--radius-pill);
-    padding: 5px 10px;
-    font-weight: bold;
+    padding: 5px 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
     cursor: pointer;
-    transition: var(--transition-bg);
     border: none;
     margin-bottom: 5px;
+    transition: var(--transition-bg), box-shadow 0.2s ease;
 }
 
+.boton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Medium size — autocontenido, se usa sin .boton */
 .boton-mediano {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--radius-pill);
     padding: 10px 20px;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
     cursor: pointer;
-    transition: var(--transition-bg);
     border: none;
+    margin-bottom: 5px;
+    transition: var(--transition-bg), box-shadow 0.2s ease;
 }
 
+.boton-mediano:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Color variants — only declare background + color */
 .boton-eliminar {
     background: var(--color-danger-light);
-    border: none;
+    color: var(--color-text);
 }
 
 .boton-eliminar:hover {
@@ -388,27 +449,25 @@ figure img:hover {
 
 .boton-insertar {
     background: var(--color-success);
-    border: none;
-    color: #1a5c1f;
+    color: var(--color-success-text);
 }
 
 .boton-insertar:hover {
-    background: #34a85a;
+    background: var(--color-success-dark);
     color: var(--color-white);
 }
 
 .boton-actualizar {
     background: var(--color-warning);
-    border: none;
+    color: var(--color-text);
 }
 
 .boton-actualizar:hover {
-    background: #e6b800;
+    background: var(--color-warning-dark);
 }
 
 .boton-primario {
     background: var(--color-cta);
-    border: none;
     color: var(--color-white);
 }
 
@@ -418,12 +477,23 @@ figure img:hover {
 
 .boton-secundario {
     background: var(--color-neutral);
-    border: none;
     color: var(--color-bg);
 }
 
 .boton-secundario:hover {
-    background: #6b6969;
+    background: var(--color-text-muted);
+}
+
+/* Outline / ghost variant for secondary actions */
+.boton-outline {
+    background: transparent;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.boton-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
 }
 
 /* ============================================================
@@ -435,7 +505,7 @@ figure img:hover {
     .container {
         width: 100%;
         max-width: 100%;
-        padding: 0 16px;
+        padding: 0 var(--space-4);
         box-sizing: border-box;
         overflow-x: hidden;
     }
@@ -452,7 +522,7 @@ figure img:hover {
         align-items: stretch;
         width: 100%;
         min-width: 0;
-        gap: 16px;
+        gap: var(--space-4);
     }
 
     /* Hijos directos del article: ancho completo, sin min-width automático */
@@ -470,6 +540,75 @@ figure img:hover {
     /* Título de sección */
     .titulo-1 {
         font-size: 1.4rem;
-        margin: 12px 0;
+        margin: var(--space-3) 0;
     }
+}
+
+/* ============================================================
+   INTRANET — cotizacion y tarjetas de datos
+   ============================================================ */
+.informacion_cliente {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.informacion_cliente .titulo h3 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-3);
+}
+
+.informacion_cliente .left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.informacion_cliente .info h3 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.informacion_cliente .info h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 2px 0 0;
+    text-align: left;
+}
+
+/* Labels de tarjetas de datos (contactenos, editor preview, cotizacion) */
+.tarjeta > h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: var(--space-4) 0 var(--space-1);
+    padding: 0 var(--space-5);
+}
+
+.tarjeta > p {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    margin: 0 0 var(--space-3);
+    padding: 0 var(--space-5);
+    text-align: left;
+}
+
+/* Total de cotizacion */
+.tarjeta > h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: var(--space-1) 0 var(--space-4);
+    padding: 0 var(--space-5);
+    text-align: left;
 }
