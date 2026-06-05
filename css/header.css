@@ -14,7 +14,8 @@ nav {
 }
 
 main {
-    margin-top: 64px;
+    margin-top: var(--space-16);
+    flex: 1;
 }
 
 /* ── Inner layout (Flexbox) ─────────────────────────────────── */
@@ -24,7 +25,7 @@ main {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--space-5);
     height: 64px;
 }
 
@@ -110,7 +111,7 @@ main {
 .nav-links li a.active {
     background: rgba(255, 255, 255, 0.1);
     color: var(--color-white);
-    border-bottom-color: #60a5fa;
+    border-bottom-color: var(--color-nav-active);
 }
 
 .nav-links li a:focus-visible {
@@ -237,7 +238,7 @@ main {
 }
 
 .nav-lateral ul li a.active {
-    background: #dbeafe;
+    background: var(--color-primary-wash);
     color: var(--color-nav);
     font-weight: 600;
 }
