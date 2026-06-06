@@ -190,6 +190,7 @@ figure img:hover {
 
 .jumbo {
     background: none;
+    width: 100%;
 }
 
 .jumbo article .jumbo-info {
@@ -207,14 +208,14 @@ figure img:hover {
 }
 
 .jumbo article .jumbo-form {
-    flex: 1 1 min(400px, 100%);
+    flex: 1 1 min(280px, 100%);
     min-width: 0;
     max-width: 400px;
     margin: 5px;
 }
 
 .jumbo article .jumbo-tabla {
-    flex: 1 1 min(800px, 100%);
+    flex: 1 1 min(600px, 100%);
     min-width: 0;
     max-width: 800px;
     margin: 5px;
