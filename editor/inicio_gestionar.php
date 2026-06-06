@@ -70,5 +70,6 @@ include_once '../funciones/inicio/inicio_actualizar.php';
             </section>
         </div>
     </main>
+    <?php require_once './fragments/footer.php'; ?>
 </body>
 </html>
