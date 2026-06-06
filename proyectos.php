@@ -16,6 +16,7 @@ include_once 'funciones/proyectos/proyectos_consultar.php';
         <div class="container flex-center">
             <h1 class="titulo-1">Proyectos</h1>
             <?php if (!empty($proyectos)): ?>
+                <div class="tarjetas-grid">
                 <?php foreach ($proyectos as $p): ?>
                     <div class="tarjeta">
                         <div>
@@ -31,6 +32,7 @@ include_once 'funciones/proyectos/proyectos_consultar.php';
                         </div>
                     </div>
                 <?php endforeach; ?>
+                </div>
             <?php else: ?>
                 <p>No hay proyectos disponibles.</p>
             <?php endif; ?>

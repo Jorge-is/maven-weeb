@@ -22,6 +22,7 @@ $hora       = date('H:i:s');
     <main>
         <div class="container flex-center">
             <h1 class="titulo-1">Servicios</h1>
+            <div class="tarjetas-grid">
             <?php foreach ($servicios as $servicio): ?>
                 <div class="tarjeta">
                     <div>
@@ -48,6 +49,7 @@ $hora       = date('H:i:s');
                     </div>
                 </div>
             <?php endforeach; ?>
+            </div>
         </div>
     </main>
     <?php require_once './fragments/footer.php'; ?>
