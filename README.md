@@ -13,6 +13,7 @@ Sitio web corporativo para una agencia de diseño y desarrollo web. Permite a la
 | Frontend | CSS custom con design tokens (custom properties) |
 | Íconos | Font Awesome 6.0 (CDN) |
 | Alertas | SweetAlert2 (CDN) |
+| Testing | Playwright (E2E, Chromium) |
 | Servidor de desarrollo | XAMPP (Apache + MySQL) |
 
 ---
@@ -53,7 +54,12 @@ maven-web/
 │   ├── table.css
 │   └── carrito.css
 │
+├── database/                   # Scripts SQL
+│   ├── schema.sql              # CREATE TABLE — estructura completa
+│   └── seed.sql                # Datos mínimos de arranque (desarrollo)
 ├── imagenes/                   # Assets estáticos
+├── js/                         # Scripts del cliente
+├── tests/                      # Suite de tests E2E (Playwright)
 ├── logs/                       # Errores PHP (bloqueado en web via .htaccess)
 │
 ├── .env                        # Variables de entorno — NO versionar
@@ -110,21 +116,31 @@ inicio           (id_inicio, banner, titulo, texto, disenio_uno, disenio_dos,
 ### Prerrequisitos
 
 - XAMPP (PHP 8.0+, Apache, MySQL)
+- Node.js 18+ (para los tests E2E)
 - Git
 
 ### Instalación
 
 ```bash
-# 1. Clonar en el directorio de XAMPP C:/xampp/htdocs/maven-web
-git clone https://github.com/Jorge-is/maven-web.git
+# 1. Clonar en el directorio de XAMPP
+git clone https://github.com/Jorge-is/maven-web.git C:/xampp/htdocs/maven-web
 
-# 2. Crear la base de datos
-# Importar el schema desde phpMyAdmin o MySQL CLI
-mysql -u root -p maven_web < schema.sql
+# 2. Instalar dependencias de Node (Playwright)
+npm install
 
 # 3. Configurar variables de entorno
 cp .env.example .env
 # Editar .env con tus credenciales de MySQL
+
+# 4. Importar el schema de la base de datos
+mysql -u root -p < database/schema.sql
+
+# 5. Generar el hash para la clave del administrador demo
+php -r "echo password_hash('TuClaveAqui', PASSWORD_BCRYPT, ['cost' => 12]);"
+# Reemplazar HASH_AQUI en database/seed.sql con el hash generado
+
+# 6. Importar los datos de arranque
+mysql -u root -p maven_web < database/seed.sql
 ```
 
 ### Variables de entorno (`.env`)
@@ -146,11 +162,41 @@ DB_PORT=3306
 
 ---
 
+## Testing
+
+La suite E2E usa **Playwright** con Chromium. Los tests corren contra XAMPP local en `http://localhost/maven-web/`.
+
+### Estructura de tests
+
+| Archivo | Cobertura |
+|---------|-----------|
+| `tests/paginas_publicas.spec.js` | Carga y estructura de todas las páginas públicas |
+| `tests/autenticacion.spec.js` | Login y registro de clientes |
+| `tests/acceso_protegido.spec.js` | Redirección cuando no hay sesión activa |
+| `tests/cliente.spec.js` | Flujo de cotización del cliente |
+| `tests/admin.spec.js` | Panel de administrador |
+| `tests/editor.spec.js` | Panel de editor |
+| `tests/login.spec.js` | Formularios de login por rol |
+
+### Comandos
+
+```bash
+# Correr todos los tests
+npm test
+
+# Abrir UI mode de Playwright
+npm run test:ui
+```
+
+> **Requisito:** XAMPP debe estar activo con Apache y MySQL antes de correr los tests.
+
+---
+
 ## Decisiones técnicas
 
 ### Sin framework PHP
 
-Se eligió PHP procedural sin framework para mantener el proyecto comprensible sin dependencias externas y como ejercicio de construcción desde cero. La lógica está separada en archivos por módulo (`funciones/`) en lugar de clases.
+PHP procedural sin framework para mantener el proyecto comprensible sin dependencias externas y como ejercicio de construcción desde cero. La lógica está separada en archivos por módulo (`funciones/`) en lugar de clases.
 
 ### `conexion.php` como núcleo compartido
 
@@ -172,8 +218,6 @@ Todas las páginas hacen `include_once 'funciones/conexion.php'` primero. Este a
 
 ## Seguridad
 
-Todas las siguientes medidas fueron implementadas:
-
 | Amenaza | Medida implementada |
 |---------|-------------------|
 | SQL Injection | Prepared statements con `mysqli` OOP en todos los módulos |
@@ -186,7 +230,7 @@ Todas las siguientes medidas fueron implementadas:
 | MIME sniffing | `X-Content-Type-Options: nosniff` |
 | Info disclosure | `display_errors = 0`; errores logueados en `logs/errors.log` |
 | Acceso a logs | `logs/.htaccess` bloquea acceso web al directorio |
-| Validación de entrada | Helper `validar()` en 16 handlers POST (required, email, min/max length, positive) |
+| Validación de entrada | Helper `validar()` en todos los handlers POST (required, email, min/max length, positive) |
 
 ---
 
@@ -196,4 +240,3 @@ Todas las siguientes medidas fueron implementadas:
 - Botones hamburger con `aria-label` y caracteres decorativos con `aria-hidden`
 - Contraste WCAG AA verificado en todos los colores de acción
 - Atributos `alt` descriptivos en imágenes informativas
-
