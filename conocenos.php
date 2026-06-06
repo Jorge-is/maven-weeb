@@ -13,7 +13,7 @@ include_once 'funciones/empresa/empresa_consultar.php';
 <body>
     <?php require_once './fragments/header.php'; ?>
     <main>
-        <section class="jumbo">
+        <section class="jumbo jumbo--conocenos">
             <article class="flex-center">
                 <h3 class="titulo-1">¿QUIÉNES SOMOS?</h3>
                 <div class="jumbo-img">

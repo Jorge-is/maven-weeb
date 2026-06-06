@@ -221,7 +221,9 @@ figure img:hover {
 }
 
 .jumbo img {
+    display: block;
     width: 100%;
+    max-width: 100%;
     margin: 0;
 }
 
@@ -344,7 +346,6 @@ figure img:hover {
 }
 
 .tarjeta-info-275 {
-    width: 275px;
     padding: var(--space-5);
     line-height: 2;
     text-align: center;
@@ -360,6 +361,38 @@ figure img:hover {
     font-size: 1rem;
     color: var(--color-text-muted);
     margin-bottom: 15px;
+}
+
+/* ============================================================
+   CARD GRID — uniform column widths
+   ============================================================ */
+.tarjetas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-5);
+    width: 100%;
+    padding: var(--space-5) 0;
+}
+
+.tarjetas-grid > .tarjeta {
+    flex: 0 0 350px;
+    width: 350px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjetas-grid > .tarjeta > .tarjeta-info,
+.tarjetas-grid > .tarjeta > .tarjeta-info-275 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjetas-grid > .tarjeta > .tarjeta-info form,
+.tarjetas-grid > .tarjeta > .tarjeta-info-275 form {
+    margin-top: auto;
 }
 
 /* ============================================================
@@ -519,6 +552,7 @@ figure img:hover {
     /* article: de fila a columna, sin centrado que desborde */
     .jumbo article {
         flex-direction: column;
+        flex-wrap: nowrap; /* neutraliza el wrap heredado de .flex-center */
         align-items: stretch;
         width: 100%;
         min-width: 0;
@@ -535,6 +569,7 @@ figure img:hover {
         min-width: 0;
         margin: 0;
         box-sizing: border-box;
+        flex: none; /* neutraliza el flex: 1 1 min(...) del desktop en layout columna */
     }
 
     /* Título de sección */
@@ -542,6 +577,42 @@ figure img:hover {
         font-size: 1.4rem;
         margin: var(--space-3) 0;
     }
+
+    /* Espaciado entre secciones en conocenos y similares */
+    .jumbo article + article {
+        margin-top: var(--space-10);
+    }
+
+    /* Imágenes jumbo con altura fija para consistencia entre secciones */
+    .jumbo article .jumbo-img img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .jumbo--conocenos {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: var(--space-10) var(--space-5);
+        box-sizing: border-box;
+    }
+
+    .jumbo--conocenos article {
+        margin-bottom: var(--space-10);
+    }
+
+    .jumbo--conocenos .jumbo-img img {
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        display: block;
+    }
+
+    .jumbo--conocenos .jumbo-info p {
+        text-align: justify;
+    }
+
+    .jumbo--conocenos article .jumbo-img { order: 1; }
+    .jumbo--conocenos article .jumbo-info { order: 2; }
 }
 
 /* ============================================================
