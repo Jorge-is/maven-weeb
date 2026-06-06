@@ -16,6 +16,8 @@ nav {
 main {
     margin-top: var(--space-16);
     flex: 1;
+    min-width: 0;
+    overflow-x: clip;
 }
 
 /* ── Inner layout (Flexbox) ─────────────────────────────────── */
@@ -262,5 +264,6 @@ main {
 @media (max-width: 1023px) {
     .nav-toggle { display: flex; }
     .nav-links  { display: none; }
+    main        { padding-top: var(--space-3); }
 }
 

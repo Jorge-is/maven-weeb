@@ -140,6 +140,7 @@
 @media (max-width: 1023px) {
     .formulario fieldset {
         padding: var(--space-4) var(--space-5);
+        margin-top: var(--space-10);
     }
 
     .submit-button {
