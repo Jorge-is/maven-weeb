@@ -7,8 +7,6 @@
     text-align: left;
     margin: 0 0 var(--space-2);
     color: var(--color-text);
-    border-left: 3px solid var(--color-primary);
-    padding-left: var(--space-3);
 }
 
 .jumbo-tabla {
@@ -82,7 +80,7 @@ table tr:hover {
 
 /* Botones de acción dentro de celdas */
 table td .boton {
-    padding: 5px 14px;
+    padding: 7px 14px;
     font-size: 0.8rem;
     margin: 2px 3px;
 }
@@ -172,7 +170,7 @@ table a {
 
     /* Restaurar tamaño de botones en mobile */
     table td .boton {
-        padding: 5px 12px;
+        padding: 7px 14px;
         font-size: 0.875rem;
     }
 

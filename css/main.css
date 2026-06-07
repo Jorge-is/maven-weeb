@@ -461,7 +461,7 @@ figure img:hover {
     line-height: 1;
     cursor: pointer;
     border: none;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     transition: var(--transition-bg), box-shadow 0.2s ease;
 }
 
