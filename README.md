@@ -1,4 +1,4 @@
-# Maven Web
+# Maven Weeb
 
 Sitio web corporativo para una agencia de diseño y desarrollo web. Permite a la empresa gestionar su contenido (proyectos, servicios, blog, empresa) y a los clientes solicitar cotizaciones en línea.
 
